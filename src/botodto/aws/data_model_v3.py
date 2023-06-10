@@ -161,7 +161,14 @@ def view_shape_info(shape_key: str = "operations", subkey: str | None = None):
                     print(v[shape_key][subkey])
 
 
-smithy_model = v3Json.parse_obj(j_smithy)
-_shape_iterator = (v for v in smithy_model.shapes.values())
-service_shape = next(_shape_iterator)
-nonservice_shapes = [s for s in _shape_iterator]
+def build_model():
+    smithy_model = v3Json.parse_obj(j_smithy)
+    return smithy_model
+
+
+def extract_shapes():
+    smithy_model = build_model()
+    _shape_iterator = (v for v in smithy_model.shapes.values())
+    service_shape = next(_shape_iterator)
+    nonservice_shapes = [s for s in _shape_iterator]
+    return service_shape, nonservice_shapes

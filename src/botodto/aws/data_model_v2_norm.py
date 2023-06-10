@@ -64,6 +64,8 @@ class v2NormalJson(BaseModel):
     shapes: dict[str, Shape]
 
 
-_norm_json = "v2-normal.json"
-j_norm = ingest_json(_norm_json)
-norm_model = v2NormalJson.parse_obj(j_norm)
+def build_model():
+    _norm_json = "v2-normal.json"
+    j_norm = ingest_json(_norm_json)
+    norm_model = v2NormalJson.parse_obj(j_norm)
+    return norm_model

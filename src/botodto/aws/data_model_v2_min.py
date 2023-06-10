@@ -67,6 +67,8 @@ class v2MinJson(BaseModel):
     shapes: dict[str, Shape]
 
 
-_min_json = "v2-min.json"
-j_min = ingest_json(_min_json)
-min_model = v2MinJson.parse_obj(j_min)
+def build_model():
+    _min_json = "v2-min.json"
+    j_min = ingest_json(_min_json)
+    min_model = v2MinJson.parse_obj(j_min)
+    return min_model
