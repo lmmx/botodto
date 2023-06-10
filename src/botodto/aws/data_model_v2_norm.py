@@ -8,7 +8,7 @@ from ..utils.json_utils import ingest_json
 
 
 class ShapeMember(BaseModel):
-    __root__ = dict[str, Optional[str]]
+    __root__: dict[str, Optional[str]]
 
 
 class Shape(BaseModel):

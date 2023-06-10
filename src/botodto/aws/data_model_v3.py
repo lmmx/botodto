@@ -13,7 +13,7 @@ pprint = partial(_pprint, sort_dicts=False)
 
 
 class ShapeMember(BaseModel):
-    __root__ = dict[str, Optional[str]]
+    __root__: dict[str, Optional[str]]
 
 
 class Pagination(BaseModel):
