@@ -5,9 +5,10 @@ from functools import partial
 from pprint import pprint as _pprint
 from typing import Any, Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, root_validator
 
 from ...utils.json_utils import ingest_json
+from ...utils.model_utils import listify_obj
 
 pprint = partial(_pprint, sort_dicts=False)
 
@@ -92,6 +93,7 @@ class TargetReference(BaseModel):
 
 
 class ServiceShape(BaseModel):
+    name: str
     type: Literal["service"]
     version: str
     operations: list[TargetReference]
@@ -112,6 +114,7 @@ class ShapeType(Enum):
 
 
 class Shape(BaseModel):
+    name: str
     type: ShapeType
     members: Optional[SpecialShapeMember]
     member: Optional[ShapeMember]
@@ -156,7 +159,11 @@ class Operations(BaseModel):
 class v3Json(BaseModel):
     smithy: float
     metadata: dict
-    shapes: dict[str, ServiceShape | Shape]
+    shapes: list[ServiceShape | Shape]
+
+    @root_validator(pre=True)
+    def insert_shape_names(cls, values):
+        return listify_obj(values=values, target_attr="shapes", key_alias="name")
 
 
 def read_source():

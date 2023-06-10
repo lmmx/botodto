@@ -12,7 +12,10 @@ from botodto.aws.models.v3 import v3Json
 def test_v2_min_value_check():
     model = build_min()
     assert isinstance(model, v2MinJson)
-    assert model.shapes  # ["ActivityList"].member is not None
+    assert model.shapes
+    name = "Sd"
+    al_shape = next(shape for shape in model.shapes if shape.name == name)
+    # It's not really covered but we don't care
 
 
 def test_v2_norm_ActivityList_value_check():
@@ -27,7 +30,9 @@ def test_v2_norm_ActivityList_value_check():
 def test_v3_value_check():
     model = build_v3()
     assert isinstance(model, v3Json)
-    service_shape = model.shapes["com.amazonaws.sfn#AWSStepFunctions"]
+    service_shape = model.shapes[0]
+    service_name = "com.amazonaws.sfn#AWSStepFunctions"
+    al_shape = next(shape for shape in model.shapes if shape.name == service_name)
     assert service_shape.type == "service"
     assert len(service_shape.operations) == 26
     assert service_shape.operations[0].target == "com.amazonaws.sfn#CreateActivity"

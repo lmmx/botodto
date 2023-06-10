@@ -3,9 +3,10 @@ from __future__ import annotations
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, root_validator
 
 from ...utils.json_utils import ingest_json
+from ...utils.model_utils import listify_obj
 
 
 class ShapeType(Enum):
@@ -32,6 +33,7 @@ class NamedShapeMember(BaseModel):
 
 
 class Shape(BaseModel):
+    name: str
     type: ShapeType
     required: Optional[list[str]]
     members: Optional[ShapeMember]
@@ -84,7 +86,11 @@ class v2MinJson(BaseModel):
     version: float
     metadata: dict
     operations: Operations
-    shapes: dict[str, Shape]
+    shapes: list[Shape]
+
+    @root_validator(pre=True)
+    def insert_shape_names(cls, values):
+        return listify_obj(values=values, target_attr="shapes", key_alias="name")
 
 
 def read_source():
