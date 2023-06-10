@@ -186,7 +186,6 @@ def inspect_source():
                     if traits_dict := subdict.get("traits", {}):
                         traits_dict.pop("smithy.api#documentation", None)
                         if traits_dict:
-                            value_trait = traits_dict.get("smithy.api#enumValue")
                             try:
                                 tt = TargetTrait.parse_obj(traits_dict)
                                 rehydrate = check_rehydrate(tt, traits_dict)
