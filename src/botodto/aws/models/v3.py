@@ -159,11 +159,15 @@ class Operations(BaseModel):
 class v3Json(BaseModel):
     smithy: float
     metadata: dict
-    shapes: list[ServiceShape | Shape]
+    service: ServiceShape
+    shapes: list[Shape]
 
     @root_validator(pre=True)
     def insert_shape_names(cls, values):
-        return listify_obj(values=values, target_attr="shapes", key_alias="name")
+        values = listify_obj(values=values, target_attr="shapes", key_alias="name")
+        # Assume the service will always be the 0'th in the list of shapes (and only!)
+        values["service"] = values["shapes"].pop(0)
+        return values
 
 
 def read_source():

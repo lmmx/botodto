@@ -8,4 +8,7 @@ from botodto.aws.models.v3 import build_model as build_v3
 
 v2 = build_v2()
 v3 = build_v3()
+
+v2_names = [shape.name for shape in v2.shapes]
+v3_names = [shape.name for shape in v3.names]
 ```

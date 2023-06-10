@@ -31,10 +31,8 @@ def test_v2_norm_ActivityList_value_check():
 def test_v3_value_check():
     model = build_v3()
     assert isinstance(model, v3Json)
-    first_shape = model.shapes[0]
     service_name = "com.amazonaws.sfn#AWSStepFunctions"
-    service_shape = next(shape for shape in model.shapes if shape.name == service_name)
-    assert first_shape is service_shape
-    assert service_shape.type == "service"
-    assert len(service_shape.operations) == 26
-    assert service_shape.operations[0].target == "com.amazonaws.sfn#CreateActivity"
+    assert model.service.type == "service"
+    assert model.service.name == service_name
+    assert len(model.service.operations) == 26
+    assert model.service.operations[0].target == "com.amazonaws.sfn#CreateActivity"
