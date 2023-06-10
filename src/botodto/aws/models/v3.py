@@ -60,16 +60,16 @@ class ServiceTrait(BaseModel):
 
 
 class Trait(BaseModel):
-    pattern: Optional[str] = Field(alias="aws.api#pattern")
-    range: Optional[Range] = Field(alias="aws.api#range")
-    idempotent: Optional[dict] = Field(alias="aws.api#idempotent")
-    sensitive: Optional[dict] = Field(alias="aws.api#sensitive")
-    default: Optional[bool] = Field(alias="aws.api#default")
-    httpError: Optional[int] = Field(alias="aws.api#httpError")
-    length: Optional[Range] = Field(alias="aws.api#length")
-    paginated: Optional[Pagination] = Field(alias="aws.api#paginated")
-    error: Optional[str] = Field(alias="aws.api#error")
-    endpoint: Optional[Endpoint] = Field(alias="aws.api#endpoint")
+    pattern: Optional[str] = Field(alias="smithy.api#pattern")
+    range: Optional[Range] = Field(alias="smithy.api#range")
+    idempotent: Optional[dict] = Field(alias="smithy.api#idempotent")
+    sensitive: Optional[dict] = Field(alias="smithy.api#sensitive")
+    default: Optional[bool] = Field(alias="smithy.api#default")
+    httpError: Optional[int] = Field(alias="smithy.api#httpError")
+    length: Optional[Range] = Field(alias="smithy.api#length")
+    paginated: Optional[Pagination] = Field(alias="smithy.api#paginated")
+    error: Optional[str] = Field(alias="smithy.api#error")
+    endpoint: Optional[Endpoint] = Field(alias="smithy.api#endpoint")
 
 
 class TargetTrait(BaseModel):
@@ -92,8 +92,22 @@ class TargetReference(BaseModel):
     target: str
 
 
-class ServiceShape(BaseModel):
+class SourcedName(BaseModel):
     name: str
+    domain: str
+    source_name: str
+
+    @root_validator(pre=True)
+    def split_name(cls, values):
+        if source_name := values.get("name"):
+            values["source_name"] = source_name
+            prefix, suffix = source_name.rsplit("#", 1)
+            values["domain"] = prefix
+            values["name"] = suffix
+        return values
+
+
+class ServiceShape(SourcedName):
     type: Literal["service"]
     version: str
     operations: list[TargetReference]
@@ -113,8 +127,7 @@ class ShapeType(Enum):
     TIMESTAMP = "timestamp"
 
 
-class Shape(BaseModel):
-    name: str
+class Shape(SourcedName):
     type: ShapeType
     members: Optional[SpecialShapeMember]
     member: Optional[ShapeMember]
