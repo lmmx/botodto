@@ -2,6 +2,16 @@
 
 Pydantic model codegen from AWS OpenAPI schemas generated from the AWS JS/TS SDK (v3)
 
+## Installation
+
+```sh
+pip install botodto
+```
+
+To develop this library see [DEVELOP.md](https://github.com/lmmx/botodto/tree/master/DEVELOP.md)
+
+## Usage
+
 ```py
 from botodto.aws.models import build_v2
 from botodto.aws.models import build_v3
