@@ -1,22 +1,24 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import Optional, Union
 
 from pydantic import BaseModel
 
 from ..utils.json_utils import ingest_json
 
 
-class ShapeMember(BaseModel):
-    __root__: dict[str, Optional[str]]
+class ShapeReference(BaseModel):
+    shape: str
+    documentation: Optional[str]
+    box: Optional[bool]
 
 
 class Shape(BaseModel):
-    type: str
+    type: Optional[str]
     required: Optional[list[str]]
-    members: Optional[ShapeMember]
+    members: Optional[dict[str, ShapeReference]]
     pattern: Optional[str]
-    member: Optional[ShapeMember]
+    member: Optional[ShapeReference]
     box: Optional[bool]
     sensitive: Optional[bool]
     min: Optional[int]
@@ -33,10 +35,6 @@ class HTTPInfo(BaseModel):
 class MemberInfo(BaseModel):
     shape: Optional[str]
     type: Optional[str]
-
-
-class ShapeReference(BaseModel):
-    shape: str
 
 
 class Output(BaseModel):
