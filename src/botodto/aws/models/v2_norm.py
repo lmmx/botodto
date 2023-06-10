@@ -5,6 +5,7 @@ from typing import Optional
 from pydantic import BaseModel, root_validator
 
 from ...utils.json_utils import ingest_json
+from ...utils.model_utils import listify_obj
 
 
 class ShapeReference(BaseModel):
@@ -54,17 +55,6 @@ class Operation(BaseModel):
 
 class Operations(BaseModel):
     __root__: dict[str, Operation]
-
-
-def bundle_obj(obj: dict, key_alias: str):
-    return [{key_alias: key, **values} for key, values in obj.items()]
-
-
-def listify_obj(values: dict, target_attr: str, key_alias: str):
-    values[target_attr] = bundle_obj(
-        obj=values.get(target_attr, {}), key_alias=key_alias
-    )
-    return values
 
 
 class v2NormalJson(BaseModel):
