@@ -1,3 +1,3 @@
-from . import compare
+from . import compare, models
 
-__all__ = ["compare"]
+__all__ = ["compare", "models"]

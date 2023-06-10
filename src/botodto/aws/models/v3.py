@@ -7,7 +7,7 @@ from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, Field
 
-from ..utils.json_utils import ingest_json
+from ...utils.json_utils import ingest_json
 
 pprint = partial(_pprint, sort_dicts=False)
 

@@ -5,7 +5,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from ..utils.json_utils import ingest_json
+from ...utils.json_utils import ingest_json
 
 
 class ShapeType(Enum):
