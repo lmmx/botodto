@@ -21,5 +21,5 @@ def test_v2_norm_ActivityList_value_check():
 
 
 def test_v3_value_check():
-    pass  # model = build_model_v3()
+    model = build_model_v3()
     # assert model.shapes # ["ActivityList"].member is not None

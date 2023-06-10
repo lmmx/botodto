@@ -3,7 +3,7 @@ from __future__ import annotations
 from enum import Enum
 from functools import partial
 from pprint import pprint as _pprint
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -71,6 +71,22 @@ class Trait(BaseModel):
     endpoint: Optional[Endpoint] = Field(alias="aws.api#endpoint")
 
 
+class TargetTrait(BaseModel):
+    required: Optional[dict[str, str]] = Field(alias="smithy.api#required")
+    enumValue: Optional[str] = Field(alias="smithy.api#enumValue")
+    default: Optional[Any] = Field(alias="smithy.api#default")
+    # documentation: str = Field(..., alias="smithy.api#documentation")
+
+
+class TraitWithNamedTarget(BaseModel):
+    target: str
+    traits: Optional[TargetTrait]  # Optional[dict]  # Optional[dict[str, Trait]]
+
+
+class SpecialShapeMember(BaseModel):
+    __root__: dict[str, Optional[TraitWithNamedTarget]]
+
+
 class TargetReference(BaseModel):
     target: str
 
@@ -97,7 +113,7 @@ class ShapeType(Enum):
 
 class Shape(BaseModel):
     type: ShapeType
-    members: Optional[ShapeMember]
+    members: Optional[SpecialShapeMember]
     member: Optional[ShapeMember]
     errors: Optional[list[TargetReference]]
     input: Optional[TargetReference]
@@ -149,6 +165,39 @@ def read_source():
     return j_smithy
 
 
+def check_rehydrate(model: BaseModel, source: dict) -> bool:
+    rehydrated = model.dict(by_alias=True, exclude_unset=True)
+    return rehydrated == source
+
+
+def inspect_source():
+    source = read_source()
+    shape_it = iter(source["shapes"].items())
+    next(shape_it)  # Discard service shape
+    rest_of_shapes = [*shape_it]
+    for s_name, s in rest_of_shapes:
+        if "members" in s:
+            members_info = s["members"]
+            members_vals = list(members_info.values())
+            members_vals_keys = [k for d in members_vals for k, v in d.items()]
+            check = tuple([k in members_vals_keys for k in ["traits", "target"]])
+            if check[0]:
+                for subdict in members_vals:
+                    if traits_dict := subdict.get("traits", {}):
+                        traits_dict.pop("smithy.api#documentation", None)
+                        if traits_dict:
+                            value_trait = traits_dict.get("smithy.api#enumValue")
+                            try:
+                                tt = TargetTrait.parse_obj(traits_dict)
+                                rehydrate = check_rehydrate(tt, traits_dict)
+                                if not rehydrate:
+                                    print(f"Did not rehydrate {tt} into {traits_dict}")
+                            except Exception as exc:
+                                print(f"Raised {exc}")
+                            pass
+    return
+
+
 def view_shape_source(shape_name="com.amazonaws.sfn#AWSStepFunctions"):
     j_smithy = read_source()
     return j_smithy["shapes"][shape_name]
@@ -177,3 +226,6 @@ def extract_shapes():
     service_shape = next(_shape_iterator)
     nonservice_shapes = [s for s in _shape_iterator]
     return service_shape, nonservice_shapes
+
+
+# service_shape, nonservice_shapes = extract_shapes()
