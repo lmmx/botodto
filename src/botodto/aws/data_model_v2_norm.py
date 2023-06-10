@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import json
-from pathlib import Path
 from typing import Optional
 
 from pydantic import BaseModel
@@ -64,6 +62,7 @@ class v2NormalJson(BaseModel):
     metadata: dict
     operations: Operations
     shapes: dict[str, Shape]
+
 
 _norm_json = "v2-normal.json"
 j_norm = ingest_json(_norm_json)

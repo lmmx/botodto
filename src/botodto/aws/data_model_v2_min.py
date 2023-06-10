@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-import json
-from pathlib import Path
 from typing import Optional
 
 from pydantic import BaseModel
 
 from ..utils.json_utils import ingest_json
+
 
 class ShapeMember(BaseModel):
     __root__ = dict[str, Optional[str]]

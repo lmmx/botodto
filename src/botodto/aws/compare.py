@@ -1,6 +1,5 @@
 from pprint import pprint
 
-from ..utils.path_utils import data_dir
 from ..utils.json_utils import ingest_json
 
 _min_json = "v2-min.json"
@@ -37,6 +36,8 @@ def get_output(json):
     pprint(json["output"])
 
 
-norm_keys = list_keys(j_norm)
-min_keys = list_keys(j_min)
-smithy_keys = list_keys(j_smithy, trim_hash=True)
+def run_comparison():
+    norm_keys = list_keys(j_norm)
+    min_keys = list_keys(j_min)
+    smithy_keys = list_keys(j_smithy, trim_hash=True)
+    return norm_keys, min_keys, smithy_keys

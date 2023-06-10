@@ -7,9 +7,9 @@ from setuptools import find_packages, setup
 
 NAME = "botodto"
 PROJECT_URLS = {
-    #"Documentation": f"https://{NAME}.readthedocs.io/",
-    "Bug Tracker": f"https://github.com/lmmx/botodto/issues",
-    "Source Code": f"https://github.com/lmmx/botodto",
+    # "Documentation": f"https://{NAME}.readthedocs.io/",
+    "Bug Tracker": f"https://github.com/lmmx/{NAME}/issues",
+    "Source Code": f"https://github.com/lmmx/{NAME}",
 }
 CLASSIFIERS = [
     "Development Status :: 4 - Beta",
@@ -27,9 +27,9 @@ CLASSIFIERS = [
 INSTALL_REQUIRES = Path("requirements.txt").read_text().splitlines()
 EXTRAS_REQUIRE = {
     "docs": [
-        #"sphinx>=4",
-        #"sphinx_rtd_theme",
-        #"sphinx-autodoc-typehints",
+        # "sphinx>=4",
+        # "sphinx_rtd_theme",
+        # "sphinx-autodoc-typehints",
     ],
     "tests": ["coverage[toml]>=5.5", "pytest"],
 }
