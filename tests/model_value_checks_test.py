@@ -18,7 +18,9 @@ def test_v2_min_value_check():
 def test_v2_norm_ActivityList_value_check():
     model = build_norm()
     assert isinstance(model, v2NormalJson)
-    shape_member = model.shapes["ActivityList"].member
+    name = "ActivityList"
+    al_shape = next(shape for shape in model.shapes if shape.name == name)
+    shape_member = al_shape.member
     assert shape_member.shape == "ActivityListItem"
 
 

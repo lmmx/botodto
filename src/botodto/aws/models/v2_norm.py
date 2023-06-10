@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, root_validator
 
 from ...utils.json_utils import ingest_json
 
@@ -14,6 +14,7 @@ class ShapeReference(BaseModel):
 
 
 class Shape(BaseModel):
+    name: str
     type: Optional[str]
     required: Optional[list[str]]
     members: Optional[dict[str, ShapeReference]]
@@ -55,11 +56,26 @@ class Operations(BaseModel):
     __root__: dict[str, Operation]
 
 
+def bundle_obj(obj: dict, key_alias: str):
+    return [{key_alias: key, **values} for key, values in obj.items()]
+
+
+def listify_obj(values: dict, target_attr: str, key_alias: str):
+    values[target_attr] = bundle_obj(
+        obj=values.get(target_attr, {}), key_alias=key_alias
+    )
+    return values
+
+
 class v2NormalJson(BaseModel):
     version: float
     metadata: dict
     operations: Operations
-    shapes: dict[str, Shape]
+    shapes: list[Shape]
+
+    @root_validator(pre=True)
+    def insert_shape_names(cls, values):
+        return listify_obj(values=values, target_attr="shapes", key_alias="name")
 
 
 def read_source():
