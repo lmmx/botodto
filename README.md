@@ -15,4 +15,8 @@ v3_names = [shape.name for shape in v3.shapes]
 assert not set(v2_names).difference(v3_names)
 
 v3_bonus_shapes = [shape for shape in v3.shapes if shape.name not in v2_names]
+
+for shape in v3_bonus_shapes:
+    if shape.type == "structure":
+        print(shape.members)
 ```

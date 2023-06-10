@@ -3,9 +3,9 @@ from __future__ import annotations
 from enum import Enum
 from functools import partial
 from pprint import pprint as _pprint
-from typing import Any, Literal, Optional
+from typing import Any, Literal, Optional, Union
 
-from pydantic import BaseModel, Field, root_validator
+from pydantic import BaseModel, Field, root_validator, validator
 
 from ...utils.json_utils import ingest_json
 from ...utils.model_utils import listify_obj
@@ -68,7 +68,7 @@ class Trait(BaseModel):
     httpError: Optional[int] = Field(alias="smithy.api#httpError")
     length: Optional[Range] = Field(alias="smithy.api#length")
     paginated: Optional[Pagination] = Field(alias="smithy.api#paginated")
-    error: Optional[str] = Field(alias="smithy.api#error")
+    error: Optional[Literal["client"]] = Field(alias="smithy.api#error")
     endpoint: Optional[Endpoint] = Field(alias="smithy.api#endpoint")
 
 
@@ -127,7 +127,17 @@ class ShapeType(Enum):
     TIMESTAMP = "timestamp"
 
 
-class Shape(SourcedName):
+class StructShape(SourcedName):
+    type: Literal["structure"]
+    members: Optional[SpecialShapeMember]
+    member: Optional[ShapeMember]
+    errors: Optional[list[TargetReference]]
+    input: Optional[TargetReference]
+    output: Optional[TargetReference]
+    traits: Optional[Trait]
+
+
+class GeneralShape(SourcedName):
     type: ShapeType
     members: Optional[SpecialShapeMember]
     member: Optional[ShapeMember]
@@ -135,6 +145,15 @@ class Shape(SourcedName):
     input: Optional[TargetReference]
     output: Optional[TargetReference]
     traits: Optional[Trait]
+
+    @validator("type")
+    def evaluate_type(cls, v):
+        return v.value
+
+
+Shape = Union[StructShape, GeneralShape]
+
+StructShape.update_forward_refs()
 
 
 class HTTPInfo(BaseModel):
