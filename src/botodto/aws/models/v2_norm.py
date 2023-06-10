@@ -10,7 +10,7 @@ from ...utils.model_utils import listify_obj
 
 class ShapeReference(BaseModel):
     shape: str
-    documentation: Optional[str]
+    # documentation: Optional[str]
     box: Optional[bool]
 
 
@@ -25,7 +25,7 @@ class Shape(BaseModel):
     sensitive: Optional[bool]
     min: Optional[int]
     max: Optional[int]
-    documentation: Optional[str]
+    # documentation: Optional[str]
     enum: Optional[list[str]]
 
 
@@ -49,7 +49,7 @@ class Operation(BaseModel):
     input: ShapeReference
     output: ShapeReference
     errors: list[ShapeReference]
-    documentation: str
+    # documentation: str
     idempotent: Optional[bool]
 
 

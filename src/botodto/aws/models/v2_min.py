@@ -43,7 +43,7 @@ class Shape(BaseModel):
     sensitive: Optional[bool]
     min: Optional[int]
     max: Optional[int]
-    documentation: Optional[str]
+    # documentation: Optional[str]
     enum: Optional[list[str]]
 
 
