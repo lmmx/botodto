@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from enum import Enum
 from typing import Optional
 
 from pydantic import BaseModel
@@ -7,16 +8,35 @@ from pydantic import BaseModel
 from ..utils.json_utils import ingest_json
 
 
+class ShapeType(Enum):
+    BOOLEAN = "boolean"
+    ENUM = "enum"
+    FLOAT = "float"
+    INTEGER = "integer"
+    LIST = "list"
+    LONG = "long"
+    OPERATION = "operation"
+    STRING = "string"
+    STRUCTURE = "structure"
+    TIMESTAMP = "timestamp"
+
+
 class ShapeMember(BaseModel):
-    __root__: dict[str, Optional[str]]
+    type: Optional[ShapeType]
+    member: Optional[ShapeMember]
+    members: Optional[ShapeMember]
+
+
+class NamedShapeMember(BaseModel):
+    __root__: dict[str, Optional[ShapeMember]]
 
 
 class Shape(BaseModel):
-    type: str
+    type: ShapeType
     required: Optional[list[str]]
     members: Optional[ShapeMember]
     pattern: Optional[str]
-    member: Optional[ShapeMember]
+    # member: Optional[ShapeMember]
     box: Optional[bool]
     sensitive: Optional[bool]
     min: Optional[int]
@@ -67,8 +87,13 @@ class v2MinJson(BaseModel):
     shapes: dict[str, Shape]
 
 
-def build_model():
+def read_source():
     _min_json = "v2-min.json"
     j_min = ingest_json(_min_json)
+    return j_min
+
+
+def build_model():
+    j_min = read_source()
     min_model = v2MinJson.parse_obj(j_min)
     return min_model

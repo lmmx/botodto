@@ -143,15 +143,19 @@ class v3Json(BaseModel):
     shapes: dict[str, ServiceShape | Shape]
 
 
-_smithy_json = "v3-smithy.json"
-j_smithy = ingest_json(_smithy_json)
+def read_source():
+    _smithy_json = "v3-smithy.json"
+    j_smithy = ingest_json(_smithy_json)
+    return j_smithy
 
 
 def view_shape_source(shape_name="com.amazonaws.sfn#AWSStepFunctions"):
+    j_smithy = read_source()
     return j_smithy["shapes"][shape_name]
 
 
 def view_shape_info(shape_key: str = "operations", subkey: str | None = None):
+    j_smithy = read_source()
     for v in [*j_smithy["shapes"].values()]:
         if v["type"] == "service" and shape_key in v:
             if subkey is None:
@@ -162,6 +166,7 @@ def view_shape_info(shape_key: str = "operations", subkey: str | None = None):
 
 
 def build_model():
+    j_smithy = read_source()
     smithy_model = v3Json.parse_obj(j_smithy)
     return smithy_model
 
