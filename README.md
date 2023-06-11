@@ -12,6 +12,9 @@ To develop this library see [DEVELOP.md](https://github.com/lmmx/botodto/tree/ma
 
 ## Usage
 
+Swap out `boto3.client` for `botodto.client` and all your responses and errors will be ingested as
+Pydantic data models.
+
 ```py
 import botodto
 
