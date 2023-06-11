@@ -13,3 +13,12 @@ It uses `tox-conda` because that's how I manage my Python environments.
 
 You can run the test suite on its own with `pytest tests/` (this is faster than the full tox suite
 but will not include pre-commit hooks, linting, etc.)
+
+To download all the schemas, totalling 110MB (100MB API schema YAML, 10MB git info), upfront rather than on demand, run
+
+```py
+import botodto
+botodto.utils.git.oa_repo.clone_repository()
+```
+
+This is not the default as that would prevent shipping to resource efficient environments (cloud etc).
