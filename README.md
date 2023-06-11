@@ -46,3 +46,31 @@ TaskTimedOut                 {'message': {'target': 'com.amazonaws.sfn#ErrorMess
 TooManyTags                  {'message': {'target': 'com.amazonaws.sfn#ErrorMessage'}, 'resourceName': {'target': 'com.amazonaws.sfn#Arn'}}
 ValidationException          {'message': {'target': 'com.amazonaws.sfn#ErrorMessage'}, 'reason': {'target': 'com.amazonaws.sfn#ValidationExceptionReason', 'traits': {}}}
 ```
+
+These names are passed in a "Code" key of the JSON response, but are raised to errors as
+`botocore.errorfactory` subclasses.
+
+For example, here I ran a request for an invalid ARN:
+
+```py
+import boto3
+import botocore
+
+client = boto3.client("stepfunctions")
+
+try:
+    response = client.describe_state_machine(stateMachineArn="abc")
+except botocore.exceptions.ClientError as exc:
+    error = exc.response["Error"]
+```
+
+The error in this case is:
+
+```py
+{'Code': 'InvalidArn',
+ 'Message': "Invalid Arn: 'Invalid Arn prefix: abc'"}
+```
+
+We can use Pydantic data models of the polymorphic value of the 'Code' key here to distinguish
+error types for operations whose errors share the same basic format
+(`{'message': {'target': 'com.amazonaws.sfn#ErrorMessage'}}` above).
