@@ -15,7 +15,7 @@ To develop this library see [DEVELOP.md](https://github.com/lmmx/botodto/tree/ma
 ```py
 import botodto
 
-client = botodto.Client("stepfunctions")
+client = botodto.client("stepfunctions")
 client.namespace.print_v3_bonus_shape_members()
 ```
 ⇣
@@ -74,3 +74,5 @@ The error in this case is:
 We can use Pydantic data models of the polymorphic value of the 'Code' key here to distinguish
 error types for operations whose errors share the same basic format
 (`{'message': {'target': 'com.amazonaws.sfn#ErrorMessage'}}` above).
+
+For more discussion see [chat log](https://chat.openai.com/share/b450d55b-b5ce-4feb-9c2c-5fefa2a454c3)

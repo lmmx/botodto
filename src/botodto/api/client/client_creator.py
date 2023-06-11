@@ -3,10 +3,10 @@ from __future__ import annotations
 from ...aws.service_models import ServiceModels
 from .service_name_mapping import MappedServiceName
 
-__all__ = ["Client"]
+__all__ = ["client"]
 
 
-class Client:
+class client:
     service_name: MappedServiceName
 
     def __init__(self, boto3_name: str):
