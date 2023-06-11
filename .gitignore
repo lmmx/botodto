@@ -14,3 +14,5 @@ _build
 .ipynb_checkpoints
 
 version.py
+
+src/botodto/data/aws/openapi_directory
