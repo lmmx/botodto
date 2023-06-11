@@ -19,6 +19,12 @@ class MappedServiceName:
         self.js_v2 = self.identify_v2()
         self.js_v3 = self.identify_v3()
 
+    def __repr__(self) -> str:
+        cls = self.__class__.__name__
+        return (
+            f"{cls}(boto3={self.boto3!r}, js_v2={self.js_v2!r}, js_v3={self.js_v3!r})"
+        )
+
     def identify_v2(self) -> str:
         js_v2 = boto3_to_js_v2.get(self.boto3)
         if js_v2 is None:

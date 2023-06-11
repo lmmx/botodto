@@ -2,7 +2,7 @@ r"""
 :mod:`botodto` is a Data Transfer Object (DTO) codegen library to produce Pydantic
 data models to wrap the AWS SDK library boto3."""
 
-__all__ = ["api", "aws"]
+__all__ = ["api", "aws", "Client"]
 
 __author__ = "Louis Maddox"
 __license__ = "MIT"
@@ -12,3 +12,4 @@ __uri__ = __url__
 __email__ = "louismmx@gmail.com"
 
 from . import api, aws
+from .api.client.client_creator import Client
