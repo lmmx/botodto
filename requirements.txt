@@ -1,3 +1,4 @@
+boto3
 defopt
 GitPython
 pydantic[email]

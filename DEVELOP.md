@@ -22,3 +22,6 @@ botodto.utils.git.oa_repo.clone_repository()
 ```
 
 This is not the default as that would prevent shipping to resource efficient environments (cloud etc).
+
+You will also need to have AWS configured on your machine. Install with `sudo apt install awscli`
+and run `aws configure` to set it up.

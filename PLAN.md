@@ -51,6 +51,9 @@ After this is shown to work, automate the process for the other services.
 1) Map the v2 and v3 services together.
 - Initially we can use a dict `v2_to_v3` as simple as `{"states": "sfn"}`, but really it ought be data-derived.
 
+**Status**: the v2 and v3 services are now mapped together using a stubbed lookup, and there's a
+`ServiceModels` class relating them together accessible under the `namespace` property of a `botodto.client` object.
+
 2) Besides components present in the v2 schema but with empty definitions (e.g. `InvalidArn`), are there any missing from the v2 schema entirely?
 - I suspect this is a contradiction, and presumably if we are to add definitions into the v2
   schema, they must already be 'known' in that schema, so would all be empty rather than missing.
