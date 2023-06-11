@@ -34,4 +34,6 @@ class ServiceModels:
     def print_v3_bonus_shape_members(self) -> None:
         for shape in self.v3_bonus_shapes:
             if shape.type == "structure":
-                print(shape.members.dict(exclude_unset=True)["__root__"])
+                print(
+                    f'{shape.name:29}{shape.members.dict(exclude_unset=True)["__root__"]}'
+                )
