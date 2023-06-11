@@ -28,7 +28,7 @@ My implementation will take one of the following routes [_TBD_]:
     I think this is because they're referenced (in paths' associated operations) but had no structure declared,
     so they are included as 'stubs'.
 
-- [ ] amends the Pydantic models to include exceptions from the v3 SDK
+- [x] amends the Pydantic models to include exceptions from the v3 SDK
   - This could be a simple proof of concept, least work to confirm a positive result?
 
 The 1st approach would be self-contained but would mean maintaining an upgrade of a service I'm
