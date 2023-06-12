@@ -53,7 +53,7 @@ ValidationException          {'message': {'target': 'com.amazonaws.sfn#ErrorMess
 These names are passed in a "Code" key of the JSON response, but are raised to errors as
 `botocore.errorfactory` subclasses.
 
-For example, here I ran a request for an invalid ARN:
+For example, running a request for an invalid ARN gives an error response with a `Code` value of "InvalidArn":
 
 ```py
 import botodto
