@@ -1,4 +1,5 @@
 boto3
 defopt
 GitPython
+more_itertools
 pydantic[email]

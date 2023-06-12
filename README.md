@@ -4,6 +4,8 @@ Pydantic model codegen from AWS OpenAPI schemas generated from the AWS JS/TS SDK
 
 ## Installation
 
+Requires Python 3.9+
+
 ```sh
 pip install botodto
 ```
