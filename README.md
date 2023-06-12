@@ -19,7 +19,7 @@ Pydantic data models.
 import botodto
 
 client = botodto.client("stepfunctions")
-client.namespace.print_v3_bonus_shape_members()
+client._namespace.print_v3_bonus_shape_members()
 ```
 ⇣
 ```py
@@ -56,18 +56,15 @@ These names are passed in a "Code" key of the JSON response, but are raised to e
 For example, here I ran a request for an invalid ARN:
 
 ```py
-import boto3
+import botodto
 import botocore
 
-client = boto3.client("stepfunctions")
+client = botodto.client("stepfunctions")
 
-try:
-    response = client.describe_state_machine(stateMachineArn="abc")
-except botocore.exceptions.ClientError as exc:
-    error = exc.response["Error"]
+response = client.describe_state_machine(stateMachineArn="abc")
 ```
 
-The error in this case is:
+The response in this case is:
 
 ```py
 {'Code': 'InvalidArn',
