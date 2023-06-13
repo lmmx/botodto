@@ -26,8 +26,11 @@ CLASSIFIERS = [
 INSTALL_REQUIRES = Path("requirements.txt").read_text().splitlines()
 EXTRAS_REQUIRE = {
     "tests": ["coverage[toml]>=5.5", "pytest"],
+    "codegen": ["datamodel_code_generator"],
 }
-EXTRAS_REQUIRE["dev"] = EXTRAS_REQUIRE["tests"] + ["pre-commit"]
+EXTRAS_REQUIRE["dev"] = (
+    EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["codegen"] + ["pre-commit"]
+)
 PYTHON_REQUIRES = ">=3.9"
 LONG_DESCRIPTION = Path("README.md").read_text()
 PACKAGE_DATA = {NAME: ["py.typed"]}

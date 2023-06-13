@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from ..api.client.service_name_mapping import MappedServiceName
+from ..api.service_name_mapping import MappedServiceName
 from .models import build_v2, build_v3
 
 __all__ = ["ServiceModels"]

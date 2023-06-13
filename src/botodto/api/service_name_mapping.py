@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import NoReturn
 
-from ...aws.map_source import boto3_to_js_v2, v2_to_v3
+from ..aws.map_source import boto3_to_js_v2, v2_to_v3
 
 __all__ = ["MappedServiceName"]
 

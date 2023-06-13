@@ -3,3 +3,4 @@ defopt
 GitPython
 more_itertools
 pydantic[email]
+tqdm

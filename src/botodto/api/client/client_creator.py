@@ -1,12 +1,18 @@
 from __future__ import annotations
 
+from importlib import import_module
+from typing import Callable, TypeVar
+
 import boto3
 import botocore
+from pydantic import BaseModel
 
 from ...aws.service_models import ServiceModels
-from .service_name_mapping import MappedServiceName
+from ..service_name_mapping import MappedServiceName
 
 __all__ = ["client"]
+
+T = TypeVar("T", bound=BaseModel)
 
 
 class client:
@@ -25,16 +31,28 @@ class client:
             wrapped_method = self._wrap_method(getattr(self._base_client, method_name))
             setattr(self, method_name, wrapped_method)
 
+    def _get_model(self, class_name: str) -> T:
+        """
+        Import the generated SDK module with the client's service name and get the model
+        with the given name. The import is cached: after the first call there's no overhead.
+        """
+        module = import_module(f".sdk.{self._service_name.boto3}", package="botodto")
+        return getattr(module, class_name)
+
     def _wrap_method(self, method):
         def wrapped_method(*args, **kwargs):
             try:
                 result = method(*args, **kwargs)
+                operation_name = self._base_client._PY_TO_OP_NAME[method]
+                model = self._get_model(f"{operation_name}Output")
             except botocore.exceptions.ClientError as exc:
                 if self._raise_errors:
                     raise exc
                 else:
                     result = exc.response["Error"]
-            return result
+                    operation_name = result.pop("Code")
+                    model = self._get_model(operation_name)
+            return model.parse_obj(result)
 
         return wrapped_method
 

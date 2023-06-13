@@ -6,7 +6,8 @@ conda activate botodto
 pip install -e .[dev]
 ```
 
-This will install the library and development dependencies (pytest, mypy etc.)
+This will install the library and typical development dependencies (pytest, mypy etc.),
+including `datamodel_code_generator` which is required to generate the SDK DTOs.
 
 There is a tox suite you can run by simply calling `tox` in the main folder.
 It uses `tox-conda` because that's how I manage my Python environments.
