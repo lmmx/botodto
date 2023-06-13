@@ -11,6 +11,7 @@ class MappedServiceName:
     boto3: str
     js_v2: str
     js_v3: str
+    _supported_services: list[str] = ["stepfunctions"]
 
     def __init__(self, boto3_name: str) -> None:
         self.boto3 = boto3_name

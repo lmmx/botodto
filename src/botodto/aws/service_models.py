@@ -8,7 +8,7 @@ __all__ = ["ServiceModels"]
 
 class ServiceModels:
     def __init__(self, service_name: MappedServiceName):
-        if service_name.boto3 == "stepfunctions":
+        if service_name.boto3 in MappedServiceName._supported_services:
             self.v2 = build_v2(name=service_name)
             self.v3 = build_v3(name=service_name)
             assert not set(self.v2_names).difference(self.v3_names)
