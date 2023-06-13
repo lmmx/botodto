@@ -7,6 +7,8 @@ from typing import Any, Literal, Optional, Union
 
 from pydantic import BaseModel, Field, root_validator, validator
 
+from ...api.schema_versioning import SchemaVersion
+from ...api.service_name_mapping import MappedServiceName
 from ...utils.json_utils import ingest_json
 from ...utils.model_utils import listify_obj
 
@@ -202,10 +204,9 @@ class v3Json(BaseModel):
         return values
 
 
-def read_source():
-    _smithy_json = "v3-smithy.json"
-    j_smithy = ingest_json(_smithy_json)
-    return j_smithy
+def read_source(service_name: str | MappedServiceName) -> dict | list:
+    service_name = MappedServiceName.ensure(service_name)
+    return ingest_json(service_name=service_name, version=SchemaVersion.JS_V3)
 
 
 def check_rehydrate(model: BaseModel, source: dict) -> bool:
@@ -256,8 +257,8 @@ def view_shape_info(shape_key: str = "operations", subkey: str | None = None):
                     print(v[shape_key][subkey])
 
 
-def build_model():
-    j_smithy = read_source()
+def build_model(service_name: MappedServiceName) -> v3Json:
+    j_smithy = read_source(service_name)
     smithy_model = v3Json.parse_obj(j_smithy)
     return smithy_model
 

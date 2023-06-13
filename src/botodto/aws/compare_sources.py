@@ -1,14 +1,14 @@
 from pprint import pprint
 
-from ..utils.json_utils import ingest_json
+from ..utils.json_utils import ingest_json_legacy
 
-_min_json = "v2-min.json"
+# _min_json = "v2-min.json"
 _norm_json = "v2-normal.json"
 _smithy_json = "v3-smithy.json"
 
-j_min = ingest_json(_min_json)
-j_norm = ingest_json(_norm_json)
-j_smithy = ingest_json(_smithy_json)
+# j_min = ingest_json_legacy(_min_json)
+j_norm = ingest_json_legacy(_norm_json)
+j_smithy = ingest_json_legacy(_smithy_json)
 
 
 def strip_char(string, char):
@@ -38,6 +38,6 @@ def get_output(json):
 
 def run_comparison():
     norm_keys = list_keys(j_norm)
-    min_keys = list_keys(j_min)
+    # min_keys = list_keys(j_min)
     smithy_keys = list_keys(j_smithy, trim_hash=True)
-    return norm_keys, min_keys, smithy_keys
+    return norm_keys, smithy_keys  # norm_keys, min_keys, smithy_keys

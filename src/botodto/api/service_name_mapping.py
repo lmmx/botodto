@@ -37,3 +37,12 @@ class MappedServiceName:
 
     def invalidate(self, explanation: str) -> NoReturn:
         raise ValueError(explanation + f": {self!r}")
+
+    @classmethod
+    def ensure(cls, service_name: str | MappedServiceName) -> MappedServiceName:
+        """
+        Helper to 'ensure' a string value is turned into a MappedServiceName.
+        """
+        if isinstance(service_name, str):
+            service_name = MappedServiceName(service_name)
+        return service_name

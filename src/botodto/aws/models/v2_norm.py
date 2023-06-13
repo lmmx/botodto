@@ -4,6 +4,8 @@ from typing import Optional
 
 from pydantic import BaseModel, root_validator
 
+from ...api.schema_versioning import SchemaVersion
+from ...api.service_name_mapping import MappedServiceName
 from ...utils.json_utils import ingest_json
 from ...utils.model_utils import listify_obj
 
@@ -68,13 +70,12 @@ class v2NormalJson(BaseModel):
         return listify_obj(values=values, target_attr="shapes", key_alias="name")
 
 
-def read_source():
-    _norm_json = "v2-normal.json"
-    j_norm = ingest_json(_norm_json)
-    return j_norm
+def read_source(service_name: str | MappedServiceName) -> dict | list:
+    service_name = MappedServiceName.ensure(service_name)
+    return ingest_json(service_name=service_name, version=SchemaVersion.JS_V2)
 
 
-def build_model():
-    j_norm = read_source()
+def build_model(service_name: str | MappedServiceName) -> v2NormalJson:
+    j_norm = read_source(service_name)
     norm_model = v2NormalJson.parse_obj(j_norm)
     return norm_model
