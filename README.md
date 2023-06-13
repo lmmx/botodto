@@ -59,22 +59,18 @@ For example, running a request for an invalid ARN gives an error response with a
 
 ```py
 import botodto
-import botocore
 
 client = botodto.client("stepfunctions")
-
-response = client.describe_state_machine(stateMachineArn="abc")
+client.list_executions(stateMachineArn="abc")
 ```
-
-The response in this case is:
-
+⇣
 ```py
-{'Code': 'InvalidArn',
- 'Message': "Invalid Arn: 'Invalid Arn prefix: abc'"}
+InvalidArn(__root__={'Message': "Invalid Arn: 'Invalid ARN prefix: abc'"})
 ```
 
-We can use Pydantic data models of the polymorphic value of the 'Code' key here to distinguish
-error types for operations whose errors share the same basic format
-(`{'message': {'target': 'com.amazonaws.sfn#ErrorMessage'}}` above).
+The response we get is an object (rather than an error being raised), specifically a Pydantic model
+of type `botodto.sdk.stepfunctions.InvalidArn`.
 
-For more discussion see [chat log](https://chat.openai.com/share/b450d55b-b5ce-4feb-9c2c-5fefa2a454c3)
+Note that this is still a work in progress: the model currently has an `Any`-typed root, which is
+not much use at all! However the normal output responses **do** have proper data models,
+and the error types will soon get them too by amending the OpenAPI schemas before running DTO model codegen.
