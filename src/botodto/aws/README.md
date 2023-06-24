@@ -3,6 +3,8 @@
 ## Problem statement
 
 1. OpenAPI schemas for AWS services are available from the OpenAPI Directory but are missing exceptions.
+   The SDK schemas that it uses come from the JS v2 SDK, which is identical to the botocore SDK
+   schemas (except in botocore there are exceptions). We can just swap out the JS SDK source for botocore.
 
 2. Pydantic model code can be generated from OpenAPI schemas using the `datamodel-code-generator` package.
 
@@ -21,11 +23,6 @@
 - Wrap `boto3` so that the `__getattr__` calls which produce calls to any name in the `_PY_TO_OP` enum of
   API operations is wrapped by the appropriate Pydantic model.
 
-- Produce Pydantic models by `datamodel-code-generator` on the OpenAPI schema derived from the v2 JS SDK
+- Produce Pydantic models by `datamodel-code-generator` on the OpenAPI schema derived from the botocore SDK schemas
 
 - Supplement the Pydantic models with exception types.
-
-Whether the v3 types will be added at the OpenAPI schema stage or after (i.e. before or after
-`datamodel-code-generator` processes the OpenAPI schema) is still unclear. It will become clear once
-I assess how trivial the exception types are. I suspect they may reliably be `message: str`-bearing
-singletons, perhaps with pattern constraints.

@@ -85,7 +85,7 @@ class v2NormalJson(BaseModel):
 
 def read_source(service_name: str | MappedServiceName) -> dict | list:
     service_name = MappedServiceName.ensure(service_name)
-    return ingest_json(service_name=service_name, version=SchemaVersion.JS_V2)
+    return ingest_json(service_name=service_name, version=SchemaVersion.V2)
 
 
 def build_model(service_name: str | MappedServiceName) -> v2NormalJson:

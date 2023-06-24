@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 from ..api.service_name_mapping import MappedServiceName
-from .models import build_v2, build_v3
+from .models import build_botocore
 
 __all__ = ["ServiceModels"]
 
@@ -9,9 +9,7 @@ __all__ = ["ServiceModels"]
 class ServiceModels:
     def __init__(self, service_name: MappedServiceName):
         if service_name.boto3 in MappedServiceName._supported_services:
-            self.v2 = build_v2(service_name=service_name)
-            self.v3 = build_v3(service_name=service_name)
-            assert not set(self.v2_names).difference(self.v3_names)
+            self.built = build_botocore(service_name=service_name)
         else:
             raise NotImplementedError("Only AWS Step Functions API implemented so far")
 
@@ -20,19 +18,11 @@ class ServiceModels:
         return [shape.name for shape in model.shapes]
 
     @property
-    def v2_names(self) -> list[str]:
-        return self.get_shape_names(model=self.v2)
+    def botocore_names(self) -> list[str]:
+        return self.get_shape_names(model=self.built)
 
-    @property
-    def v3_names(self) -> list[str]:
-        return self.get_shape_names(model=self.v3)
-
-    @property
-    def v3_bonus_shapes(self) -> list[BaseModel]:  # Not a good annotation
-        return [shape for shape in self.v3.shapes if shape.name not in self.v2_names]
-
-    def print_v3_bonus_shape_members(self) -> None:
-        for shape in self.v3_bonus_shapes:
+    def print_error_shape_members(self) -> None:
+        for shape in self.built.shapes:
             if shape.type == "structure":
                 print(
                     f'{shape.name:29}{shape.members.dict(exclude_unset=True)["__root__"]}'
