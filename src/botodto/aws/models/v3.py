@@ -12,6 +12,41 @@ from ...api.service_name_mapping import MappedServiceName
 from ...utils.json_utils import ingest_json
 from ...utils.model_utils import listify_obj
 
+__all__ = [
+    "ShapeMember",
+    "Pagination",
+    "Range",
+    "Endpoint",
+    "AwsApiService",
+    "SigV4",
+    "XmlNamespace",
+    "ServiceTrait",
+    "Trait",
+    "TargetTrait",
+    "TraitWithNamedTarget",
+    "SpecialShapeMember",
+    "TargetReference",
+    "SourcedName",
+    "ServiceShape",
+    "ShapeType",
+    "StructShape",
+    "GeneralShape",
+    "HTTPInfo",
+    "MemberInfo",
+    "ShapeReference",
+    "Output",
+    "Operation",
+    "Operations",
+    "v3Json",
+    "read_source",
+    "check_rehydrate",
+    "inspect_source",
+    "view_shape_source",
+    "view_shape_info",
+    "build_model",
+    "extract_shapes",
+]
+
 pprint = partial(_pprint, sort_dicts=False)
 
 

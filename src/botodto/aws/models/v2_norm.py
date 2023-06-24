@@ -9,6 +9,19 @@ from ...api.service_name_mapping import MappedServiceName
 from ...utils.json_utils import ingest_json
 from ...utils.model_utils import listify_obj
 
+__all__ = [
+    "ShapeReference",
+    "Shape",
+    "HTTPInfo",
+    "MemberInfo",
+    "Output",
+    "Operation",
+    "Operations",
+    "v2NormalJson",
+    "read_source",
+    "build_model",
+]
+
 
 class ShapeReference(BaseModel):
     shape: str
