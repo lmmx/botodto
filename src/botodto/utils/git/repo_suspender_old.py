@@ -1,5 +1,6 @@
-from pathlib import Path
 import shutil
+from pathlib import Path
+
 from git import Repo
 
 deactivated_git_path = ".git.deactivated"

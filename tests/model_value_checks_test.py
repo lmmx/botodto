@@ -1,6 +1,7 @@
 """
 Tests for complete model integrity.
 """
+
 from botodto.aws.models.v2_norm import build_model as build_v2
 from botodto.aws.models.v2_norm import v2NormalJson
 from botodto.aws.models.v3 import build_model as build_v3
