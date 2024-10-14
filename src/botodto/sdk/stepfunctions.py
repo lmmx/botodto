@@ -176,28 +176,28 @@ class CloudWatchLogsLogGroup(BaseModel):
 
 
 class StateMachineType(Enum):
-    STANDARD = 'STANDARD'
-    EXPRESS = 'EXPRESS'
+    STANDARD = "STANDARD"
+    EXPRESS = "EXPRESS"
 
 
 class ExecutionStatus(Enum):
-    RUNNING = 'RUNNING'
-    SUCCEEDED = 'SUCCEEDED'
-    FAILED = 'FAILED'
-    TIMED_OUT = 'TIMED_OUT'
-    ABORTED = 'ABORTED'
+    RUNNING = "RUNNING"
+    SUCCEEDED = "SUCCEEDED"
+    FAILED = "FAILED"
+    TIMED_OUT = "TIMED_OUT"
+    ABORTED = "ABORTED"
 
 
 class MapRunStatus(Enum):
-    RUNNING = 'RUNNING'
-    SUCCEEDED = 'SUCCEEDED'
-    FAILED = 'FAILED'
-    ABORTED = 'ABORTED'
+    RUNNING = "RUNNING"
+    SUCCEEDED = "SUCCEEDED"
+    FAILED = "FAILED"
+    ABORTED = "ABORTED"
 
 
 class StateMachineStatus(Enum):
-    ACTIVE = 'ACTIVE'
-    DELETING = 'DELETING'
+    ACTIVE = "ACTIVE"
+    DELETING = "DELETING"
 
 
 class ExecutionAbortedEventDetails(BaseModel):
@@ -216,65 +216,65 @@ class ExecutionTimedOutEventDetails(BaseModel):
 
 
 class HistoryEventType(Enum):
-    ActivityFailed = 'ActivityFailed'
-    ActivityScheduled = 'ActivityScheduled'
-    ActivityScheduleFailed = 'ActivityScheduleFailed'
-    ActivityStarted = 'ActivityStarted'
-    ActivitySucceeded = 'ActivitySucceeded'
-    ActivityTimedOut = 'ActivityTimedOut'
-    ChoiceStateEntered = 'ChoiceStateEntered'
-    ChoiceStateExited = 'ChoiceStateExited'
-    ExecutionAborted = 'ExecutionAborted'
-    ExecutionFailed = 'ExecutionFailed'
-    ExecutionStarted = 'ExecutionStarted'
-    ExecutionSucceeded = 'ExecutionSucceeded'
-    ExecutionTimedOut = 'ExecutionTimedOut'
-    FailStateEntered = 'FailStateEntered'
-    LambdaFunctionFailed = 'LambdaFunctionFailed'
-    LambdaFunctionScheduled = 'LambdaFunctionScheduled'
-    LambdaFunctionScheduleFailed = 'LambdaFunctionScheduleFailed'
-    LambdaFunctionStarted = 'LambdaFunctionStarted'
-    LambdaFunctionStartFailed = 'LambdaFunctionStartFailed'
-    LambdaFunctionSucceeded = 'LambdaFunctionSucceeded'
-    LambdaFunctionTimedOut = 'LambdaFunctionTimedOut'
-    MapIterationAborted = 'MapIterationAborted'
-    MapIterationFailed = 'MapIterationFailed'
-    MapIterationStarted = 'MapIterationStarted'
-    MapIterationSucceeded = 'MapIterationSucceeded'
-    MapStateAborted = 'MapStateAborted'
-    MapStateEntered = 'MapStateEntered'
-    MapStateExited = 'MapStateExited'
-    MapStateFailed = 'MapStateFailed'
-    MapStateStarted = 'MapStateStarted'
-    MapStateSucceeded = 'MapStateSucceeded'
-    ParallelStateAborted = 'ParallelStateAborted'
-    ParallelStateEntered = 'ParallelStateEntered'
-    ParallelStateExited = 'ParallelStateExited'
-    ParallelStateFailed = 'ParallelStateFailed'
-    ParallelStateStarted = 'ParallelStateStarted'
-    ParallelStateSucceeded = 'ParallelStateSucceeded'
-    PassStateEntered = 'PassStateEntered'
-    PassStateExited = 'PassStateExited'
-    SucceedStateEntered = 'SucceedStateEntered'
-    SucceedStateExited = 'SucceedStateExited'
-    TaskFailed = 'TaskFailed'
-    TaskScheduled = 'TaskScheduled'
-    TaskStarted = 'TaskStarted'
-    TaskStartFailed = 'TaskStartFailed'
-    TaskStateAborted = 'TaskStateAborted'
-    TaskStateEntered = 'TaskStateEntered'
-    TaskStateExited = 'TaskStateExited'
-    TaskSubmitFailed = 'TaskSubmitFailed'
-    TaskSubmitted = 'TaskSubmitted'
-    TaskSucceeded = 'TaskSucceeded'
-    TaskTimedOut = 'TaskTimedOut'
-    WaitStateAborted = 'WaitStateAborted'
-    WaitStateEntered = 'WaitStateEntered'
-    WaitStateExited = 'WaitStateExited'
-    MapRunAborted = 'MapRunAborted'
-    MapRunFailed = 'MapRunFailed'
-    MapRunStarted = 'MapRunStarted'
-    MapRunSucceeded = 'MapRunSucceeded'
+    ActivityFailed = "ActivityFailed"
+    ActivityScheduled = "ActivityScheduled"
+    ActivityScheduleFailed = "ActivityScheduleFailed"
+    ActivityStarted = "ActivityStarted"
+    ActivitySucceeded = "ActivitySucceeded"
+    ActivityTimedOut = "ActivityTimedOut"
+    ChoiceStateEntered = "ChoiceStateEntered"
+    ChoiceStateExited = "ChoiceStateExited"
+    ExecutionAborted = "ExecutionAborted"
+    ExecutionFailed = "ExecutionFailed"
+    ExecutionStarted = "ExecutionStarted"
+    ExecutionSucceeded = "ExecutionSucceeded"
+    ExecutionTimedOut = "ExecutionTimedOut"
+    FailStateEntered = "FailStateEntered"
+    LambdaFunctionFailed = "LambdaFunctionFailed"
+    LambdaFunctionScheduled = "LambdaFunctionScheduled"
+    LambdaFunctionScheduleFailed = "LambdaFunctionScheduleFailed"
+    LambdaFunctionStarted = "LambdaFunctionStarted"
+    LambdaFunctionStartFailed = "LambdaFunctionStartFailed"
+    LambdaFunctionSucceeded = "LambdaFunctionSucceeded"
+    LambdaFunctionTimedOut = "LambdaFunctionTimedOut"
+    MapIterationAborted = "MapIterationAborted"
+    MapIterationFailed = "MapIterationFailed"
+    MapIterationStarted = "MapIterationStarted"
+    MapIterationSucceeded = "MapIterationSucceeded"
+    MapStateAborted = "MapStateAborted"
+    MapStateEntered = "MapStateEntered"
+    MapStateExited = "MapStateExited"
+    MapStateFailed = "MapStateFailed"
+    MapStateStarted = "MapStateStarted"
+    MapStateSucceeded = "MapStateSucceeded"
+    ParallelStateAborted = "ParallelStateAborted"
+    ParallelStateEntered = "ParallelStateEntered"
+    ParallelStateExited = "ParallelStateExited"
+    ParallelStateFailed = "ParallelStateFailed"
+    ParallelStateStarted = "ParallelStateStarted"
+    ParallelStateSucceeded = "ParallelStateSucceeded"
+    PassStateEntered = "PassStateEntered"
+    PassStateExited = "PassStateExited"
+    SucceedStateEntered = "SucceedStateEntered"
+    SucceedStateExited = "SucceedStateExited"
+    TaskFailed = "TaskFailed"
+    TaskScheduled = "TaskScheduled"
+    TaskStarted = "TaskStarted"
+    TaskStartFailed = "TaskStartFailed"
+    TaskStateAborted = "TaskStateAborted"
+    TaskStateEntered = "TaskStateEntered"
+    TaskStateExited = "TaskStateExited"
+    TaskSubmitFailed = "TaskSubmitFailed"
+    TaskSubmitted = "TaskSubmitted"
+    TaskSucceeded = "TaskSucceeded"
+    TaskTimedOut = "TaskTimedOut"
+    WaitStateAborted = "WaitStateAborted"
+    WaitStateEntered = "WaitStateEntered"
+    WaitStateExited = "WaitStateExited"
+    MapRunAborted = "MapRunAborted"
+    MapRunFailed = "MapRunFailed"
+    MapRunStarted = "MapRunStarted"
+    MapRunSucceeded = "MapRunSucceeded"
 
 
 class TaskFailedEventDetails(BaseModel):
@@ -357,10 +357,10 @@ class LogDestination(BaseModel):
 
 
 class LogLevel(Enum):
-    ALL = 'ALL'
-    ERROR = 'ERROR'
-    FATAL = 'FATAL'
-    OFF = 'OFF'
+    ALL = "ALL"
+    ERROR = "ERROR"
+    FATAL = "FATAL"
+    OFF = "OFF"
 
 
 class MapRunListItem(BaseModel):
@@ -372,9 +372,9 @@ class MapRunListItem(BaseModel):
 
 
 class SyncExecutionStatus(Enum):
-    SUCCEEDED = 'SUCCEEDED'
-    FAILED = 'FAILED'
-    TIMED_OUT = 'TIMED_OUT'
+    SUCCEEDED = "SUCCEEDED"
+    FAILED = "FAILED"
+    TIMED_OUT = "TIMED_OUT"
 
 
 class StateMachineListItem(BaseModel):
@@ -429,7 +429,7 @@ class DescribeExecutionOutput(BaseModel):
     output: Optional[SecretStr] = None
     outputDetails: Optional[CloudWatchEventsExecutionDataDetails] = None
     traceHeader: Optional[
-        constr(regex=r'[\x00-\x7F]*', min_length=0, max_length=256)
+        constr(regex=r"[\x00-\x7F]*", min_length=0, max_length=256)
     ] = None
     mapRunArn: Optional[constr(min_length=1, max_length=2000)] = None
     error: Optional[SecretStr] = None
@@ -523,7 +523,7 @@ class StartExecutionInput(BaseModel):
     name: Optional[constr(min_length=1, max_length=80)] = None
     input: Optional[SecretStr] = None
     traceHeader: Optional[
-        constr(regex=r'[\x00-\x7F]*', min_length=0, max_length=256)
+        constr(regex=r"[\x00-\x7F]*", min_length=0, max_length=256)
     ] = None
 
 
@@ -541,7 +541,7 @@ class StartSyncExecutionOutput(BaseModel):
     output: Optional[SecretStr] = None
     outputDetails: Optional[CloudWatchEventsExecutionDataDetails] = None
     traceHeader: Optional[
-        constr(regex=r'[\x00-\x7F]*', min_length=0, max_length=256)
+        constr(regex=r"[\x00-\x7F]*", min_length=0, max_length=256)
     ] = None
     billingDetails: Optional[BillingDetails] = None
 
@@ -551,7 +551,7 @@ class StartSyncExecutionInput(BaseModel):
     name: Optional[constr(min_length=1, max_length=80)] = None
     input: Optional[SecretStr] = None
     traceHeader: Optional[
-        constr(regex=r'[\x00-\x7F]*', min_length=0, max_length=256)
+        constr(regex=r"[\x00-\x7F]*", min_length=0, max_length=256)
     ] = None
 
 
@@ -713,9 +713,9 @@ class HistoryEvent(BaseModel):
     id: int
     previousEventId: Optional[int] = None
     activityFailedEventDetails: Optional[ActivityFailedEventDetails] = None
-    activityScheduleFailedEventDetails: Optional[
-        ActivityScheduleFailedEventDetails
-    ] = None
+    activityScheduleFailedEventDetails: Optional[ActivityScheduleFailedEventDetails] = (
+        None
+    )
     activityScheduledEventDetails: Optional[ActivityScheduledEventDetails] = None
     activityStartedEventDetails: Optional[ActivityStartedEventDetails] = None
     activitySucceededEventDetails: Optional[ActivitySucceededEventDetails] = None
@@ -751,9 +751,9 @@ class HistoryEvent(BaseModel):
     lambdaFunctionSucceededEventDetails: Optional[
         LambdaFunctionSucceededEventDetails
     ] = None
-    lambdaFunctionTimedOutEventDetails: Optional[
-        LambdaFunctionTimedOutEventDetails
-    ] = None
+    lambdaFunctionTimedOutEventDetails: Optional[LambdaFunctionTimedOutEventDetails] = (
+        None
+    )
     stateEnteredEventDetails: Optional[StateEnteredEventDetails] = None
     stateExitedEventDetails: Optional[StateExitedEventDetails] = None
     mapRunStartedEventDetails: Optional[MapRunStartedEventDetails] = None
@@ -853,6 +853,6 @@ class UpdateStateMachineInput(BaseModel):
 class GetExecutionHistoryOutput(BaseModel):
     events: List[HistoryEvent] = Field(
         ...,
-        description='Contains details about the events that occurred during an execution.',
+        description="Contains details about the events that occurred during an execution.",
     )
     nextToken: Optional[constr(min_length=1, max_length=1024)] = None
