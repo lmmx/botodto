@@ -1,6 +1,7 @@
 """
 Tests for basic model comparison of values.
 """
+
 from botodto.aws import compare_sources
 
 
