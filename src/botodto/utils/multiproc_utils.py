@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from multiprocessing import Process, cpu_count
-from typing import Callable
+from collections.abc import Callable
 
 from more_itertools import chunked
 from tqdm import tqdm

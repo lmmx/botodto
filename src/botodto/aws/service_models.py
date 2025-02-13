@@ -25,5 +25,5 @@ class ServiceModels:
         for shape in self.built.shapes:
             if shape.type == "structure":
                 print(
-                    f'{shape.name:29}{shape.members.dict(exclude_unset=True)["__root__"]}'
+                    f'{shape.name:29}{shape.members.dict(exclude_unset=True)["__root__"]}',
                 )

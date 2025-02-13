@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
 
 from pydantic import BaseModel, root_validator
 
@@ -19,29 +18,29 @@ __all__ = [
     "Operations",
     "v2NormalJson",
     "read_source",
-    "build_model",
+    "build_botocore",
 ]
 
 
 class ShapeReference(BaseModel):
     shape: str
     # documentation: Optional[str]
-    box: Optional[bool]
+    box: bool | None
 
 
 class Shape(BaseModel):
     name: str
-    type: Optional[str]
-    required: Optional[list[str]]
-    members: Optional[dict[str, ShapeReference]]
-    pattern: Optional[str]
-    member: Optional[ShapeReference]
-    box: Optional[bool]
-    sensitive: Optional[bool]
-    min: Optional[int]
-    max: Optional[int]
+    type: str | None
+    required: list[str] | None
+    members: dict[str, ShapeReference] | None
+    pattern: str | None
+    member: ShapeReference | None
+    box: bool | None
+    sensitive: bool | None
+    min: int | None
+    max: int | None
     # documentation: Optional[str]
-    enum: Optional[list[str]]
+    enum: list[str] | None
 
 
 class HTTPInfo(BaseModel):
@@ -50,8 +49,8 @@ class HTTPInfo(BaseModel):
 
 
 class MemberInfo(BaseModel):
-    shape: Optional[str]
-    type: Optional[str]
+    shape: str | None
+    type: str | None
 
 
 class Output(BaseModel):
@@ -65,7 +64,7 @@ class Operation(BaseModel):
     output: ShapeReference
     errors: list[ShapeReference]
     # documentation: str
-    idempotent: Optional[bool]
+    idempotent: bool | None
 
 
 class Operations(BaseModel):
@@ -88,7 +87,7 @@ def read_source(service_name: str | MappedServiceName) -> dict | list:
     return ingest_json(service_name=service_name, version=SchemaVersion.V2)
 
 
-def build_model(service_name: str | MappedServiceName) -> v2NormalJson:
+def build_botocore(service_name: str | MappedServiceName) -> v2NormalJson:
     j_norm = read_source(service_name)
     norm_model = v2NormalJson.parse_obj(j_norm)
     return norm_model

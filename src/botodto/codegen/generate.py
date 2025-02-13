@@ -49,7 +49,7 @@ def _generate_dto_models(service: MappedServiceName) -> None:
     input_dir = service_dir / most_recent_schema_date
     input_schema = next(input_dir.glob("*.yaml"))
     output_file = sdk_dir / f"{service.boto3}.py"
-    output = generate(
+    generate(
         input_=input_schema,
         input_file_type=InputFileType.OpenAPI,
         output=output_file,

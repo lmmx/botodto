@@ -1,6 +1,7 @@
 """
 Tests for complete model integrity.
 """
+
 from pytest import mark
 
 from botodto.aws.models.v2_norm import build_model as build_norm

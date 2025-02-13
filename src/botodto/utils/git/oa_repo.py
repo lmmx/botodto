@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from git import Repo
 
 from ..path_utils import aws_oa_dir
@@ -23,7 +21,11 @@ def clone_repository():
     repo_url = "git@github.com:APIs-guru/openapi-directory.git"
     sparse_pattern = "APIs/amazonaws.com"
     repo = Repo.clone_from(
-        url=repo_url, to_path=aws_oa_dir, no_checkout=True, depth=1, filter="tree:0"
+        url=repo_url,
+        to_path=aws_oa_dir,
+        no_checkout=True,
+        depth=1,
+        filter="tree:0",
     )
     with GitRepoController(repo_path=aws_oa_dir, fresh=True):
         repo.git.sparse_checkout("set", "--no-cone", sparse_pattern)

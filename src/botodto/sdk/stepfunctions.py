@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import Any, List, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field, SecretStr, confloat, conint, constr
 
@@ -144,151 +144,151 @@ class MissingRequiredParameter(BaseModel):
 
 
 class ActivityFailedEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class ActivityScheduleFailedEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class ActivityStartedEventDetails(BaseModel):
-    workerName: Optional[constr(max_length=256)] = None
+    workerName: constr(max_length=256) | None = None
 
 
 class ActivityTimedOutEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class BillingDetails(BaseModel):
-    billedMemoryUsedInMB: Optional[conint(ge=0)] = None
-    billedDurationInMilliseconds: Optional[conint(ge=0)] = None
+    billedMemoryUsedInMB: conint(ge=0) | None = None
+    billedDurationInMilliseconds: conint(ge=0) | None = None
 
 
 class CloudWatchEventsExecutionDataDetails(BaseModel):
-    included: Optional[bool] = None
+    included: bool | None = None
 
 
 class CloudWatchLogsLogGroup(BaseModel):
-    logGroupArn: Optional[constr(min_length=1, max_length=256)] = None
+    logGroupArn: constr(min_length=1, max_length=256) | None = None
 
 
 class StateMachineType(Enum):
-    STANDARD = 'STANDARD'
-    EXPRESS = 'EXPRESS'
+    STANDARD = "STANDARD"
+    EXPRESS = "EXPRESS"
 
 
 class ExecutionStatus(Enum):
-    RUNNING = 'RUNNING'
-    SUCCEEDED = 'SUCCEEDED'
-    FAILED = 'FAILED'
-    TIMED_OUT = 'TIMED_OUT'
-    ABORTED = 'ABORTED'
+    RUNNING = "RUNNING"
+    SUCCEEDED = "SUCCEEDED"
+    FAILED = "FAILED"
+    TIMED_OUT = "TIMED_OUT"
+    ABORTED = "ABORTED"
 
 
 class MapRunStatus(Enum):
-    RUNNING = 'RUNNING'
-    SUCCEEDED = 'SUCCEEDED'
-    FAILED = 'FAILED'
-    ABORTED = 'ABORTED'
+    RUNNING = "RUNNING"
+    SUCCEEDED = "SUCCEEDED"
+    FAILED = "FAILED"
+    ABORTED = "ABORTED"
 
 
 class StateMachineStatus(Enum):
-    ACTIVE = 'ACTIVE'
-    DELETING = 'DELETING'
+    ACTIVE = "ACTIVE"
+    DELETING = "DELETING"
 
 
 class ExecutionAbortedEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class ExecutionFailedEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class ExecutionTimedOutEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class HistoryEventType(Enum):
-    ActivityFailed = 'ActivityFailed'
-    ActivityScheduled = 'ActivityScheduled'
-    ActivityScheduleFailed = 'ActivityScheduleFailed'
-    ActivityStarted = 'ActivityStarted'
-    ActivitySucceeded = 'ActivitySucceeded'
-    ActivityTimedOut = 'ActivityTimedOut'
-    ChoiceStateEntered = 'ChoiceStateEntered'
-    ChoiceStateExited = 'ChoiceStateExited'
-    ExecutionAborted = 'ExecutionAborted'
-    ExecutionFailed = 'ExecutionFailed'
-    ExecutionStarted = 'ExecutionStarted'
-    ExecutionSucceeded = 'ExecutionSucceeded'
-    ExecutionTimedOut = 'ExecutionTimedOut'
-    FailStateEntered = 'FailStateEntered'
-    LambdaFunctionFailed = 'LambdaFunctionFailed'
-    LambdaFunctionScheduled = 'LambdaFunctionScheduled'
-    LambdaFunctionScheduleFailed = 'LambdaFunctionScheduleFailed'
-    LambdaFunctionStarted = 'LambdaFunctionStarted'
-    LambdaFunctionStartFailed = 'LambdaFunctionStartFailed'
-    LambdaFunctionSucceeded = 'LambdaFunctionSucceeded'
-    LambdaFunctionTimedOut = 'LambdaFunctionTimedOut'
-    MapIterationAborted = 'MapIterationAborted'
-    MapIterationFailed = 'MapIterationFailed'
-    MapIterationStarted = 'MapIterationStarted'
-    MapIterationSucceeded = 'MapIterationSucceeded'
-    MapStateAborted = 'MapStateAborted'
-    MapStateEntered = 'MapStateEntered'
-    MapStateExited = 'MapStateExited'
-    MapStateFailed = 'MapStateFailed'
-    MapStateStarted = 'MapStateStarted'
-    MapStateSucceeded = 'MapStateSucceeded'
-    ParallelStateAborted = 'ParallelStateAborted'
-    ParallelStateEntered = 'ParallelStateEntered'
-    ParallelStateExited = 'ParallelStateExited'
-    ParallelStateFailed = 'ParallelStateFailed'
-    ParallelStateStarted = 'ParallelStateStarted'
-    ParallelStateSucceeded = 'ParallelStateSucceeded'
-    PassStateEntered = 'PassStateEntered'
-    PassStateExited = 'PassStateExited'
-    SucceedStateEntered = 'SucceedStateEntered'
-    SucceedStateExited = 'SucceedStateExited'
-    TaskFailed = 'TaskFailed'
-    TaskScheduled = 'TaskScheduled'
-    TaskStarted = 'TaskStarted'
-    TaskStartFailed = 'TaskStartFailed'
-    TaskStateAborted = 'TaskStateAborted'
-    TaskStateEntered = 'TaskStateEntered'
-    TaskStateExited = 'TaskStateExited'
-    TaskSubmitFailed = 'TaskSubmitFailed'
-    TaskSubmitted = 'TaskSubmitted'
-    TaskSucceeded = 'TaskSucceeded'
-    TaskTimedOut = 'TaskTimedOut'
-    WaitStateAborted = 'WaitStateAborted'
-    WaitStateEntered = 'WaitStateEntered'
-    WaitStateExited = 'WaitStateExited'
-    MapRunAborted = 'MapRunAborted'
-    MapRunFailed = 'MapRunFailed'
-    MapRunStarted = 'MapRunStarted'
-    MapRunSucceeded = 'MapRunSucceeded'
+    ActivityFailed = "ActivityFailed"
+    ActivityScheduled = "ActivityScheduled"
+    ActivityScheduleFailed = "ActivityScheduleFailed"
+    ActivityStarted = "ActivityStarted"
+    ActivitySucceeded = "ActivitySucceeded"
+    ActivityTimedOut = "ActivityTimedOut"
+    ChoiceStateEntered = "ChoiceStateEntered"
+    ChoiceStateExited = "ChoiceStateExited"
+    ExecutionAborted = "ExecutionAborted"
+    ExecutionFailed = "ExecutionFailed"
+    ExecutionStarted = "ExecutionStarted"
+    ExecutionSucceeded = "ExecutionSucceeded"
+    ExecutionTimedOut = "ExecutionTimedOut"
+    FailStateEntered = "FailStateEntered"
+    LambdaFunctionFailed = "LambdaFunctionFailed"
+    LambdaFunctionScheduled = "LambdaFunctionScheduled"
+    LambdaFunctionScheduleFailed = "LambdaFunctionScheduleFailed"
+    LambdaFunctionStarted = "LambdaFunctionStarted"
+    LambdaFunctionStartFailed = "LambdaFunctionStartFailed"
+    LambdaFunctionSucceeded = "LambdaFunctionSucceeded"
+    LambdaFunctionTimedOut = "LambdaFunctionTimedOut"
+    MapIterationAborted = "MapIterationAborted"
+    MapIterationFailed = "MapIterationFailed"
+    MapIterationStarted = "MapIterationStarted"
+    MapIterationSucceeded = "MapIterationSucceeded"
+    MapStateAborted = "MapStateAborted"
+    MapStateEntered = "MapStateEntered"
+    MapStateExited = "MapStateExited"
+    MapStateFailed = "MapStateFailed"
+    MapStateStarted = "MapStateStarted"
+    MapStateSucceeded = "MapStateSucceeded"
+    ParallelStateAborted = "ParallelStateAborted"
+    ParallelStateEntered = "ParallelStateEntered"
+    ParallelStateExited = "ParallelStateExited"
+    ParallelStateFailed = "ParallelStateFailed"
+    ParallelStateStarted = "ParallelStateStarted"
+    ParallelStateSucceeded = "ParallelStateSucceeded"
+    PassStateEntered = "PassStateEntered"
+    PassStateExited = "PassStateExited"
+    SucceedStateEntered = "SucceedStateEntered"
+    SucceedStateExited = "SucceedStateExited"
+    TaskFailed = "TaskFailed"
+    TaskScheduled = "TaskScheduled"
+    TaskStarted = "TaskStarted"
+    TaskStartFailed = "TaskStartFailed"
+    TaskStateAborted = "TaskStateAborted"
+    TaskStateEntered = "TaskStateEntered"
+    TaskStateExited = "TaskStateExited"
+    TaskSubmitFailed = "TaskSubmitFailed"
+    TaskSubmitted = "TaskSubmitted"
+    TaskSucceeded = "TaskSucceeded"
+    TaskTimedOut = "TaskTimedOut"
+    WaitStateAborted = "WaitStateAborted"
+    WaitStateEntered = "WaitStateEntered"
+    WaitStateExited = "WaitStateExited"
+    MapRunAborted = "MapRunAborted"
+    MapRunFailed = "MapRunFailed"
+    MapRunStarted = "MapRunStarted"
+    MapRunSucceeded = "MapRunSucceeded"
 
 
 class TaskFailedEventDetails(BaseModel):
     resourceType: constr(min_length=1, max_length=80)
     resource: constr(min_length=1, max_length=80)
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class TaskStartFailedEventDetails(BaseModel):
     resourceType: constr(min_length=1, max_length=80)
     resource: constr(min_length=1, max_length=80)
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class TaskStartedEventDetails(BaseModel):
@@ -299,68 +299,68 @@ class TaskStartedEventDetails(BaseModel):
 class TaskSubmitFailedEventDetails(BaseModel):
     resourceType: constr(min_length=1, max_length=80)
     resource: constr(min_length=1, max_length=80)
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class TaskTimedOutEventDetails(BaseModel):
     resourceType: constr(min_length=1, max_length=80)
     resource: constr(min_length=1, max_length=80)
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class MapStateStartedEventDetails(BaseModel):
-    length: Optional[conint(ge=0)] = None
+    length: conint(ge=0) | None = None
 
 
 class MapIterationEventDetails(BaseModel):
-    name: Optional[constr(min_length=1, max_length=80)] = None
-    index: Optional[conint(ge=0)] = None
+    name: constr(min_length=1, max_length=80) | None = None
+    index: conint(ge=0) | None = None
 
 
 class LambdaFunctionFailedEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class LambdaFunctionScheduleFailedEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class LambdaFunctionStartFailedEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class LambdaFunctionTimedOutEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class MapRunStartedEventDetails(BaseModel):
-    mapRunArn: Optional[constr(min_length=1, max_length=2000)] = None
+    mapRunArn: constr(min_length=1, max_length=2000) | None = None
 
 
 class MapRunFailedEventDetails(BaseModel):
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class TaskCredentials(BaseModel):
-    roleArn: Optional[constr(min_length=1, max_length=2000)] = None
+    roleArn: constr(min_length=1, max_length=2000) | None = None
 
 
 class LogDestination(BaseModel):
-    cloudWatchLogsLogGroup: Optional[CloudWatchLogsLogGroup] = None
+    cloudWatchLogsLogGroup: CloudWatchLogsLogGroup | None = None
 
 
 class LogLevel(Enum):
-    ALL = 'ALL'
-    ERROR = 'ERROR'
-    FATAL = 'FATAL'
-    OFF = 'OFF'
+    ALL = "ALL"
+    ERROR = "ERROR"
+    FATAL = "FATAL"
+    OFF = "OFF"
 
 
 class MapRunListItem(BaseModel):
@@ -368,13 +368,13 @@ class MapRunListItem(BaseModel):
     mapRunArn: constr(min_length=1, max_length=2000)
     stateMachineArn: constr(min_length=1, max_length=256)
     startDate: datetime
-    stopDate: Optional[datetime] = None
+    stopDate: datetime | None = None
 
 
 class SyncExecutionStatus(Enum):
-    SUCCEEDED = 'SUCCEEDED'
-    FAILED = 'FAILED'
-    TIMED_OUT = 'TIMED_OUT'
+    SUCCEEDED = "SUCCEEDED"
+    FAILED = "FAILED"
+    TIMED_OUT = "TIMED_OUT"
 
 
 class StateMachineListItem(BaseModel):
@@ -385,8 +385,8 @@ class StateMachineListItem(BaseModel):
 
 
 class Tag(BaseModel):
-    key: Optional[constr(min_length=1, max_length=128)] = None
-    value: Optional[constr(min_length=0, max_length=256)] = None
+    key: constr(min_length=1, max_length=128) | None = None
+    value: constr(min_length=0, max_length=256) | None = None
 
 
 class CreateActivityOutput(BaseModel):
@@ -420,20 +420,20 @@ class DescribeActivityInput(BaseModel):
 class DescribeExecutionOutput(BaseModel):
     executionArn: constr(min_length=1, max_length=256)
     stateMachineArn: constr(min_length=1, max_length=256)
-    name: Optional[constr(min_length=1, max_length=80)] = None
+    name: constr(min_length=1, max_length=80) | None = None
     status: ExecutionStatus
     startDate: datetime
-    stopDate: Optional[datetime] = None
-    input: Optional[SecretStr] = None
-    inputDetails: Optional[CloudWatchEventsExecutionDataDetails] = None
-    output: Optional[SecretStr] = None
-    outputDetails: Optional[CloudWatchEventsExecutionDataDetails] = None
-    traceHeader: Optional[
-        constr(regex=r'[\x00-\x7F]*', min_length=0, max_length=256)
-    ] = None
-    mapRunArn: Optional[constr(min_length=1, max_length=2000)] = None
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    stopDate: datetime | None = None
+    input: SecretStr | None = None
+    inputDetails: CloudWatchEventsExecutionDataDetails | None = None
+    output: SecretStr | None = None
+    outputDetails: CloudWatchEventsExecutionDataDetails | None = None
+    traceHeader: None | (
+        constr(regex=r"[\x00-\x7F]*", min_length=0, max_length=256)
+    ) = None
+    mapRunArn: constr(min_length=1, max_length=2000) | None = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class DescribeExecutionInput(BaseModel):
@@ -453,45 +453,45 @@ class DescribeStateMachineForExecutionInput(BaseModel):
 
 
 class GetActivityTaskOutput(BaseModel):
-    taskToken: Optional[constr(min_length=1, max_length=1024)] = None
-    input: Optional[SecretStr] = None
+    taskToken: constr(min_length=1, max_length=1024) | None = None
+    input: SecretStr | None = None
 
 
 class GetActivityTaskInput(BaseModel):
     activityArn: constr(min_length=1, max_length=256)
-    workerName: Optional[constr(min_length=1, max_length=80)] = None
+    workerName: constr(min_length=1, max_length=80) | None = None
 
 
 class GetExecutionHistoryInput(BaseModel):
     executionArn: constr(min_length=1, max_length=256)
-    maxResults: Optional[conint(ge=0, le=1000)] = None
-    reverseOrder: Optional[bool] = None
-    nextToken: Optional[constr(min_length=1, max_length=1024)] = None
-    includeExecutionData: Optional[bool] = None
+    maxResults: conint(ge=0, le=1000) | None = None
+    reverseOrder: bool | None = None
+    nextToken: constr(min_length=1, max_length=1024) | None = None
+    includeExecutionData: bool | None = None
 
 
 class ListActivitiesInput(BaseModel):
-    maxResults: Optional[conint(ge=0, le=1000)] = None
-    nextToken: Optional[constr(min_length=1, max_length=1024)] = None
+    maxResults: conint(ge=0, le=1000) | None = None
+    nextToken: constr(min_length=1, max_length=1024) | None = None
 
 
 class ListExecutionsInput(BaseModel):
-    stateMachineArn: Optional[constr(min_length=1, max_length=256)] = None
-    statusFilter: Optional[ExecutionStatus] = None
-    maxResults: Optional[conint(ge=0, le=1000)] = None
-    nextToken: Optional[constr(min_length=1, max_length=3096)] = None
-    mapRunArn: Optional[constr(min_length=1, max_length=2000)] = None
+    stateMachineArn: constr(min_length=1, max_length=256) | None = None
+    statusFilter: ExecutionStatus | None = None
+    maxResults: conint(ge=0, le=1000) | None = None
+    nextToken: constr(min_length=1, max_length=3096) | None = None
+    mapRunArn: constr(min_length=1, max_length=2000) | None = None
 
 
 class ListMapRunsInput(BaseModel):
     executionArn: constr(min_length=1, max_length=256)
-    maxResults: Optional[conint(ge=0, le=1000)] = None
-    nextToken: Optional[constr(min_length=1, max_length=1024)] = None
+    maxResults: conint(ge=0, le=1000) | None = None
+    nextToken: constr(min_length=1, max_length=1024) | None = None
 
 
 class ListStateMachinesInput(BaseModel):
-    maxResults: Optional[conint(ge=0, le=1000)] = None
-    nextToken: Optional[constr(min_length=1, max_length=1024)] = None
+    maxResults: conint(ge=0, le=1000) | None = None
+    nextToken: constr(min_length=1, max_length=1024) | None = None
 
 
 class ListTagsForResourceInput(BaseModel):
@@ -500,8 +500,8 @@ class ListTagsForResourceInput(BaseModel):
 
 class SendTaskFailureInput(BaseModel):
     taskToken: constr(min_length=1, max_length=1024)
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class SendTaskHeartbeatInput(BaseModel):
@@ -520,39 +520,39 @@ class StartExecutionOutput(BaseModel):
 
 class StartExecutionInput(BaseModel):
     stateMachineArn: constr(min_length=1, max_length=256)
-    name: Optional[constr(min_length=1, max_length=80)] = None
-    input: Optional[SecretStr] = None
-    traceHeader: Optional[
-        constr(regex=r'[\x00-\x7F]*', min_length=0, max_length=256)
-    ] = None
+    name: constr(min_length=1, max_length=80) | None = None
+    input: SecretStr | None = None
+    traceHeader: None | (
+        constr(regex=r"[\x00-\x7F]*", min_length=0, max_length=256)
+    ) = None
 
 
 class StartSyncExecutionOutput(BaseModel):
     executionArn: constr(min_length=1, max_length=256)
-    stateMachineArn: Optional[constr(min_length=1, max_length=256)] = None
-    name: Optional[constr(min_length=1, max_length=80)] = None
+    stateMachineArn: constr(min_length=1, max_length=256) | None = None
+    name: constr(min_length=1, max_length=80) | None = None
     startDate: datetime
     stopDate: datetime
     status: SyncExecutionStatus
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
-    input: Optional[SecretStr] = None
-    inputDetails: Optional[CloudWatchEventsExecutionDataDetails] = None
-    output: Optional[SecretStr] = None
-    outputDetails: Optional[CloudWatchEventsExecutionDataDetails] = None
-    traceHeader: Optional[
-        constr(regex=r'[\x00-\x7F]*', min_length=0, max_length=256)
-    ] = None
-    billingDetails: Optional[BillingDetails] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
+    input: SecretStr | None = None
+    inputDetails: CloudWatchEventsExecutionDataDetails | None = None
+    output: SecretStr | None = None
+    outputDetails: CloudWatchEventsExecutionDataDetails | None = None
+    traceHeader: None | (
+        constr(regex=r"[\x00-\x7F]*", min_length=0, max_length=256)
+    ) = None
+    billingDetails: BillingDetails | None = None
 
 
 class StartSyncExecutionInput(BaseModel):
     stateMachineArn: constr(min_length=1, max_length=256)
-    name: Optional[constr(min_length=1, max_length=80)] = None
-    input: Optional[SecretStr] = None
-    traceHeader: Optional[
-        constr(regex=r'[\x00-\x7F]*', min_length=0, max_length=256)
-    ] = None
+    name: constr(min_length=1, max_length=80) | None = None
+    input: SecretStr | None = None
+    traceHeader: None | (
+        constr(regex=r"[\x00-\x7F]*", min_length=0, max_length=256)
+    ) = None
 
 
 class StopExecutionOutput(BaseModel):
@@ -561,20 +561,20 @@ class StopExecutionOutput(BaseModel):
 
 class StopExecutionInput(BaseModel):
     executionArn: constr(min_length=1, max_length=256)
-    error: Optional[SecretStr] = None
-    cause: Optional[SecretStr] = None
+    error: SecretStr | None = None
+    cause: SecretStr | None = None
 
 
 class UntagResourceInput(BaseModel):
     resourceArn: constr(min_length=1, max_length=256)
-    tagKeys: List[constr(min_length=1, max_length=128)]
+    tagKeys: list[constr(min_length=1, max_length=128)]
 
 
 class UpdateMapRunInput(BaseModel):
     mapRunArn: constr(min_length=1, max_length=2000)
-    maxConcurrency: Optional[conint(ge=0)] = None
-    toleratedFailurePercentage: Optional[confloat(ge=0.0, le=100.0)] = None
-    toleratedFailureCount: Optional[conint(ge=0)] = None
+    maxConcurrency: conint(ge=0) | None = None
+    toleratedFailurePercentage: confloat(ge=0.0, le=100.0) | None = None
+    toleratedFailureCount: conint(ge=0) | None = None
 
 
 class UpdateStateMachineOutput(BaseModel):
@@ -588,30 +588,30 @@ class ActivityListItem(BaseModel):
 
 
 class HistoryEventExecutionDataDetails(BaseModel):
-    truncated: Optional[bool] = None
+    truncated: bool | None = None
 
 
 class ActivityScheduledEventDetails(BaseModel):
     resource: constr(min_length=1, max_length=256)
-    input: Optional[SecretStr] = None
-    inputDetails: Optional[HistoryEventExecutionDataDetails] = None
-    timeoutInSeconds: Optional[int] = None
-    heartbeatInSeconds: Optional[int] = None
+    input: SecretStr | None = None
+    inputDetails: HistoryEventExecutionDataDetails | None = None
+    timeoutInSeconds: int | None = None
+    heartbeatInSeconds: int | None = None
 
 
 class ActivitySucceededEventDetails(BaseModel):
-    output: Optional[SecretStr] = None
-    outputDetails: Optional[HistoryEventExecutionDataDetails] = None
+    output: SecretStr | None = None
+    outputDetails: HistoryEventExecutionDataDetails | None = None
 
 
 class LoggingConfiguration(BaseModel):
-    level: Optional[LogLevel] = None
-    includeExecutionData: Optional[bool] = None
-    destinations: Optional[List[LogDestination]] = None
+    level: LogLevel | None = None
+    includeExecutionData: bool | None = None
+    destinations: list[LogDestination] | None = None
 
 
 class TracingConfiguration(BaseModel):
-    enabled: Optional[bool] = None
+    enabled: bool | None = None
 
 
 class MapRunItemCounts(BaseModel):
@@ -642,20 +642,20 @@ class ExecutionListItem(BaseModel):
     name: constr(min_length=1, max_length=80)
     status: ExecutionStatus
     startDate: datetime
-    stopDate: Optional[datetime] = None
-    mapRunArn: Optional[constr(min_length=1, max_length=2000)] = None
-    itemCount: Optional[conint(ge=0)] = None
+    stopDate: datetime | None = None
+    mapRunArn: constr(min_length=1, max_length=2000) | None = None
+    itemCount: conint(ge=0) | None = None
 
 
 class ExecutionStartedEventDetails(BaseModel):
-    input: Optional[SecretStr] = None
-    inputDetails: Optional[HistoryEventExecutionDataDetails] = None
-    roleArn: Optional[constr(min_length=1, max_length=256)] = None
+    input: SecretStr | None = None
+    inputDetails: HistoryEventExecutionDataDetails | None = None
+    roleArn: constr(min_length=1, max_length=256) | None = None
 
 
 class ExecutionSucceededEventDetails(BaseModel):
-    output: Optional[SecretStr] = None
-    outputDetails: Optional[HistoryEventExecutionDataDetails] = None
+    output: SecretStr | None = None
+    outputDetails: HistoryEventExecutionDataDetails | None = None
 
 
 class TaskScheduledEventDetails(BaseModel):
@@ -663,116 +663,116 @@ class TaskScheduledEventDetails(BaseModel):
     resource: constr(min_length=1, max_length=80)
     region: constr(min_length=1, max_length=80)
     parameters: SecretStr
-    timeoutInSeconds: Optional[int] = None
-    heartbeatInSeconds: Optional[int] = None
-    taskCredentials: Optional[TaskCredentials] = None
+    timeoutInSeconds: int | None = None
+    heartbeatInSeconds: int | None = None
+    taskCredentials: TaskCredentials | None = None
 
 
 class TaskSubmittedEventDetails(BaseModel):
     resourceType: constr(min_length=1, max_length=80)
     resource: constr(min_length=1, max_length=80)
-    output: Optional[SecretStr] = None
-    outputDetails: Optional[HistoryEventExecutionDataDetails] = None
+    output: SecretStr | None = None
+    outputDetails: HistoryEventExecutionDataDetails | None = None
 
 
 class TaskSucceededEventDetails(BaseModel):
     resourceType: constr(min_length=1, max_length=80)
     resource: constr(min_length=1, max_length=80)
-    output: Optional[SecretStr] = None
-    outputDetails: Optional[HistoryEventExecutionDataDetails] = None
+    output: SecretStr | None = None
+    outputDetails: HistoryEventExecutionDataDetails | None = None
 
 
 class LambdaFunctionScheduledEventDetails(BaseModel):
     resource: constr(min_length=1, max_length=256)
-    input: Optional[SecretStr] = None
-    inputDetails: Optional[HistoryEventExecutionDataDetails] = None
-    timeoutInSeconds: Optional[int] = None
-    taskCredentials: Optional[TaskCredentials] = None
+    input: SecretStr | None = None
+    inputDetails: HistoryEventExecutionDataDetails | None = None
+    timeoutInSeconds: int | None = None
+    taskCredentials: TaskCredentials | None = None
 
 
 class LambdaFunctionSucceededEventDetails(BaseModel):
-    output: Optional[SecretStr] = None
-    outputDetails: Optional[HistoryEventExecutionDataDetails] = None
+    output: SecretStr | None = None
+    outputDetails: HistoryEventExecutionDataDetails | None = None
 
 
 class StateEnteredEventDetails(BaseModel):
     name: constr(min_length=1, max_length=80)
-    input: Optional[SecretStr] = None
-    inputDetails: Optional[HistoryEventExecutionDataDetails] = None
+    input: SecretStr | None = None
+    inputDetails: HistoryEventExecutionDataDetails | None = None
 
 
 class StateExitedEventDetails(BaseModel):
     name: constr(min_length=1, max_length=80)
-    output: Optional[SecretStr] = None
-    outputDetails: Optional[HistoryEventExecutionDataDetails] = None
+    output: SecretStr | None = None
+    outputDetails: HistoryEventExecutionDataDetails | None = None
 
 
 class HistoryEvent(BaseModel):
     timestamp: datetime
     type: HistoryEventType
     id: int
-    previousEventId: Optional[int] = None
-    activityFailedEventDetails: Optional[ActivityFailedEventDetails] = None
-    activityScheduleFailedEventDetails: Optional[
+    previousEventId: int | None = None
+    activityFailedEventDetails: ActivityFailedEventDetails | None = None
+    activityScheduleFailedEventDetails: None | (
         ActivityScheduleFailedEventDetails
-    ] = None
-    activityScheduledEventDetails: Optional[ActivityScheduledEventDetails] = None
-    activityStartedEventDetails: Optional[ActivityStartedEventDetails] = None
-    activitySucceededEventDetails: Optional[ActivitySucceededEventDetails] = None
-    activityTimedOutEventDetails: Optional[ActivityTimedOutEventDetails] = None
-    taskFailedEventDetails: Optional[TaskFailedEventDetails] = None
-    taskScheduledEventDetails: Optional[TaskScheduledEventDetails] = None
-    taskStartFailedEventDetails: Optional[TaskStartFailedEventDetails] = None
-    taskStartedEventDetails: Optional[TaskStartedEventDetails] = None
-    taskSubmitFailedEventDetails: Optional[TaskSubmitFailedEventDetails] = None
-    taskSubmittedEventDetails: Optional[TaskSubmittedEventDetails] = None
-    taskSucceededEventDetails: Optional[TaskSucceededEventDetails] = None
-    taskTimedOutEventDetails: Optional[TaskTimedOutEventDetails] = None
-    executionFailedEventDetails: Optional[ExecutionFailedEventDetails] = None
-    executionStartedEventDetails: Optional[ExecutionStartedEventDetails] = None
-    executionSucceededEventDetails: Optional[ExecutionSucceededEventDetails] = None
-    executionAbortedEventDetails: Optional[ExecutionAbortedEventDetails] = None
-    executionTimedOutEventDetails: Optional[ExecutionTimedOutEventDetails] = None
-    mapStateStartedEventDetails: Optional[MapStateStartedEventDetails] = None
-    mapIterationStartedEventDetails: Optional[MapIterationEventDetails] = None
-    mapIterationSucceededEventDetails: Optional[MapIterationEventDetails] = None
-    mapIterationFailedEventDetails: Optional[MapIterationEventDetails] = None
-    mapIterationAbortedEventDetails: Optional[MapIterationEventDetails] = None
-    lambdaFunctionFailedEventDetails: Optional[LambdaFunctionFailedEventDetails] = None
-    lambdaFunctionScheduleFailedEventDetails: Optional[
+    ) = None
+    activityScheduledEventDetails: ActivityScheduledEventDetails | None = None
+    activityStartedEventDetails: ActivityStartedEventDetails | None = None
+    activitySucceededEventDetails: ActivitySucceededEventDetails | None = None
+    activityTimedOutEventDetails: ActivityTimedOutEventDetails | None = None
+    taskFailedEventDetails: TaskFailedEventDetails | None = None
+    taskScheduledEventDetails: TaskScheduledEventDetails | None = None
+    taskStartFailedEventDetails: TaskStartFailedEventDetails | None = None
+    taskStartedEventDetails: TaskStartedEventDetails | None = None
+    taskSubmitFailedEventDetails: TaskSubmitFailedEventDetails | None = None
+    taskSubmittedEventDetails: TaskSubmittedEventDetails | None = None
+    taskSucceededEventDetails: TaskSucceededEventDetails | None = None
+    taskTimedOutEventDetails: TaskTimedOutEventDetails | None = None
+    executionFailedEventDetails: ExecutionFailedEventDetails | None = None
+    executionStartedEventDetails: ExecutionStartedEventDetails | None = None
+    executionSucceededEventDetails: ExecutionSucceededEventDetails | None = None
+    executionAbortedEventDetails: ExecutionAbortedEventDetails | None = None
+    executionTimedOutEventDetails: ExecutionTimedOutEventDetails | None = None
+    mapStateStartedEventDetails: MapStateStartedEventDetails | None = None
+    mapIterationStartedEventDetails: MapIterationEventDetails | None = None
+    mapIterationSucceededEventDetails: MapIterationEventDetails | None = None
+    mapIterationFailedEventDetails: MapIterationEventDetails | None = None
+    mapIterationAbortedEventDetails: MapIterationEventDetails | None = None
+    lambdaFunctionFailedEventDetails: LambdaFunctionFailedEventDetails | None = None
+    lambdaFunctionScheduleFailedEventDetails: None | (
         LambdaFunctionScheduleFailedEventDetails
-    ] = None
-    lambdaFunctionScheduledEventDetails: Optional[
+    ) = None
+    lambdaFunctionScheduledEventDetails: None | (
         LambdaFunctionScheduledEventDetails
-    ] = None
-    lambdaFunctionStartFailedEventDetails: Optional[
+    ) = None
+    lambdaFunctionStartFailedEventDetails: None | (
         LambdaFunctionStartFailedEventDetails
-    ] = None
-    lambdaFunctionSucceededEventDetails: Optional[
+    ) = None
+    lambdaFunctionSucceededEventDetails: None | (
         LambdaFunctionSucceededEventDetails
-    ] = None
-    lambdaFunctionTimedOutEventDetails: Optional[
+    ) = None
+    lambdaFunctionTimedOutEventDetails: None | (
         LambdaFunctionTimedOutEventDetails
-    ] = None
-    stateEnteredEventDetails: Optional[StateEnteredEventDetails] = None
-    stateExitedEventDetails: Optional[StateExitedEventDetails] = None
-    mapRunStartedEventDetails: Optional[MapRunStartedEventDetails] = None
-    mapRunFailedEventDetails: Optional[MapRunFailedEventDetails] = None
+    ) = None
+    stateEnteredEventDetails: StateEnteredEventDetails | None = None
+    stateExitedEventDetails: StateExitedEventDetails | None = None
+    mapRunStartedEventDetails: MapRunStartedEventDetails | None = None
+    mapRunFailedEventDetails: MapRunFailedEventDetails | None = None
 
 
 class CreateActivityInput(BaseModel):
     name: constr(min_length=1, max_length=80)
-    tags: Optional[List[Tag]] = None
+    tags: list[Tag] | None = None
 
 
 class CreateStateMachineInput(BaseModel):
     name: constr(min_length=1, max_length=80)
     definition: SecretStr
     roleArn: constr(min_length=1, max_length=256)
-    type: Optional[StateMachineType] = None
-    loggingConfiguration: Optional[LoggingConfiguration] = None
-    tags: Optional[List[Tag]] = None
-    tracingConfiguration: Optional[TracingConfiguration] = None
+    type: StateMachineType | None = None
+    loggingConfiguration: LoggingConfiguration | None = None
+    tags: list[Tag] | None = None
+    tracingConfiguration: TracingConfiguration | None = None
 
 
 class DescribeMapRunOutput(BaseModel):
@@ -780,7 +780,7 @@ class DescribeMapRunOutput(BaseModel):
     executionArn: constr(min_length=1, max_length=256)
     status: MapRunStatus
     startDate: datetime
-    stopDate: Optional[datetime] = None
+    stopDate: datetime | None = None
     maxConcurrency: conint(ge=0)
     toleratedFailurePercentage: confloat(ge=0.0, le=100.0)
     toleratedFailureCount: conint(ge=0)
@@ -791,14 +791,14 @@ class DescribeMapRunOutput(BaseModel):
 class DescribeStateMachineOutput(BaseModel):
     stateMachineArn: constr(min_length=1, max_length=256)
     name: constr(min_length=1, max_length=80)
-    status: Optional[StateMachineStatus] = None
+    status: StateMachineStatus | None = None
     definition: SecretStr
     roleArn: constr(min_length=1, max_length=256)
     type: StateMachineType
     creationDate: datetime
-    loggingConfiguration: Optional[LoggingConfiguration] = None
-    tracingConfiguration: Optional[TracingConfiguration] = None
-    label: Optional[str] = None
+    loggingConfiguration: LoggingConfiguration | None = None
+    tracingConfiguration: TracingConfiguration | None = None
+    label: str | None = None
 
 
 class DescribeStateMachineForExecutionOutput(BaseModel):
@@ -807,52 +807,52 @@ class DescribeStateMachineForExecutionOutput(BaseModel):
     definition: SecretStr
     roleArn: constr(min_length=1, max_length=256)
     updateDate: datetime
-    loggingConfiguration: Optional[LoggingConfiguration] = None
-    tracingConfiguration: Optional[TracingConfiguration] = None
-    mapRunArn: Optional[constr(min_length=1, max_length=2000)] = None
-    label: Optional[str] = None
+    loggingConfiguration: LoggingConfiguration | None = None
+    tracingConfiguration: TracingConfiguration | None = None
+    mapRunArn: constr(min_length=1, max_length=2000) | None = None
+    label: str | None = None
 
 
 class ListActivitiesOutput(BaseModel):
-    activities: List[ActivityListItem]
-    nextToken: Optional[constr(min_length=1, max_length=1024)] = None
+    activities: list[ActivityListItem]
+    nextToken: constr(min_length=1, max_length=1024) | None = None
 
 
 class ListExecutionsOutput(BaseModel):
-    executions: List[ExecutionListItem]
-    nextToken: Optional[constr(min_length=1, max_length=3096)] = None
+    executions: list[ExecutionListItem]
+    nextToken: constr(min_length=1, max_length=3096) | None = None
 
 
 class ListMapRunsOutput(BaseModel):
-    mapRuns: List[MapRunListItem]
-    nextToken: Optional[constr(min_length=1, max_length=1024)] = None
+    mapRuns: list[MapRunListItem]
+    nextToken: constr(min_length=1, max_length=1024) | None = None
 
 
 class ListStateMachinesOutput(BaseModel):
-    stateMachines: List[StateMachineListItem]
-    nextToken: Optional[constr(min_length=1, max_length=1024)] = None
+    stateMachines: list[StateMachineListItem]
+    nextToken: constr(min_length=1, max_length=1024) | None = None
 
 
 class ListTagsForResourceOutput(BaseModel):
-    tags: Optional[List[Tag]] = None
+    tags: list[Tag] | None = None
 
 
 class TagResourceInput(BaseModel):
     resourceArn: constr(min_length=1, max_length=256)
-    tags: List[Tag]
+    tags: list[Tag]
 
 
 class UpdateStateMachineInput(BaseModel):
     stateMachineArn: constr(min_length=1, max_length=256)
-    definition: Optional[SecretStr] = None
-    roleArn: Optional[constr(min_length=1, max_length=256)] = None
-    loggingConfiguration: Optional[LoggingConfiguration] = None
-    tracingConfiguration: Optional[TracingConfiguration] = None
+    definition: SecretStr | None = None
+    roleArn: constr(min_length=1, max_length=256) | None = None
+    loggingConfiguration: LoggingConfiguration | None = None
+    tracingConfiguration: TracingConfiguration | None = None
 
 
 class GetExecutionHistoryOutput(BaseModel):
-    events: List[HistoryEvent] = Field(
+    events: list[HistoryEvent] = Field(
         ...,
-        description='Contains details about the events that occurred during an execution.',
+        description="Contains details about the events that occurred during an execution.",
     )
-    nextToken: Optional[constr(min_length=1, max_length=1024)] = None
+    nextToken: constr(min_length=1, max_length=1024) | None = None
